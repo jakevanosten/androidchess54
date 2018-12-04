@@ -20,7 +20,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
+        //yer that's whatsup
         assertEquals("com.example.jake.androidchess", appContext.getPackageName());
     }
 }
