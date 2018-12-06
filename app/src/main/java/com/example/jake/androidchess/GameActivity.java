@@ -25,20 +25,19 @@ public class GameActivity extends AppCompatActivity {
 
         if(!firstClickFlag){ //first time clicking a space, store the imageview info for next click
             space1 = (ImageView) v;
-            String pieceID = getResources().getResourceName(v.getId());
-            int[] locations = getPieceIndex(v, pieceID);
+            int[] locations = getPieceIndex(v);
             row = locations[0];
             col = locations[1];
             System.out.println("(" + row + "," + col + ")");
         }
     }
 
-    public int[] getPieceIndex(View v, String id){
+    public int[] getPieceIndex(View v){
         grid = findViewById(R.id.board);
         int[] location = new int[2];
         int childCount = grid.getChildCount();
         for(int i=0;i<childCount;i++){
-            if(id == getResources().getResourceName((grid.getChildAt(i)).getId())){ //matches ID
+            if(v.equals((View) grid.getChildAt(i))){
                 location[0] = i/8;
                 location[1] = i%8;
                 break;

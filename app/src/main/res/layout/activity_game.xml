@@ -462,6 +462,7 @@
             android:layout_height="40dp"
             android:background="#54a838"
             android:contentDescription="@null"
+            android:onClick="move"
             android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
@@ -512,6 +513,7 @@
             android:background="#54a838"
             android:contentDescription="@null"
             android:padding="5dp"
+            android:onClick="move"
             app:srcCompat="@drawable/wpawn" />
 
         <ImageView
@@ -606,6 +608,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#a9d49b"
+            android:onClick="move"
             android:contentDescription="@null"
             app:srcCompat="@drawable/wqueen" />
 
@@ -614,6 +617,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#54a838"
+            android:onClick="move"
             android:contentDescription="@null"
             app:srcCompat="@drawable/wking" />
 
