@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AndroidChess</string>
+    <string name="app_name">Android Chess</string>
+    <string name="logoName">Chess Logo</string>
+    <string name="playText">Play Game</string>
+    <string name="recordText">Recorded Games</string>
+
 </resources>
