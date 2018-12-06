@@ -27,278 +27,312 @@
             android:id="@+id/br1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/brook" />
 
         <ImageView
             android:id="@+id/bk1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/bknight" />
 
         <ImageView
             android:id="@+id/bb1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/bbishop" />
 
         <ImageView
             android:id="@+id/bq"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/bqueen" />
 
         <ImageView
             android:id="@+id/bk"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/bking" />
 
         <ImageView
             android:id="@+id/bb2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/bbishop" />
 
         <ImageView
             android:id="@+id/bk2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/bknight" />
 
         <ImageView
             android:id="@+id/br2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/brook" />
 
         <ImageView
             android:id="@+id/bp1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp3"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp4"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp5"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp6"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp7"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/bp8"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/bpawn" />
 
         <ImageView
             android:id="@+id/b1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b3"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b4"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
+
         <ImageView
             android:id="@+id/b5"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b6"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
+
         <ImageView
             android:id="@+id/b7"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b8"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b9"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b10"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b11"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b12"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b13"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b14"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b15"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#54a838"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
             android:id="@+id/b16"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:contentDescription="@null"
             android:background="#a9d49b"
+            android:contentDescription="@null"
+            android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/blank" />
 
         <ImageView
