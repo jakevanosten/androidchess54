@@ -7,6 +7,17 @@
     android:background="@drawable/gradient"
     tools:context=".GameActivity">
 
+    <Button
+        android:id="@+id/undo_button2"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="88dp"
+        android:onClick="undo"
+        android:text="@string/ai" />
+
     <GridLayout
         android:id="@+id/gridColors"
         android:layout_width="320dp"
@@ -953,6 +964,8 @@
         android:id="@+id/undo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:onClick="undo"
         android:text="@string/undo" />
 
@@ -988,7 +1001,7 @@
             android:layout_margin="5sp"
             android:background="#ffffff"
             android:foreground="@drawable/bqueen"
-            android:onClick="pawnChoice"
+            android:onClick="upgradePiece"
             android:padding="5sp"
             android:textAlignment="center"
             android:textSize="12sp" />
@@ -1000,7 +1013,7 @@
             android:layout_margin="5sp"
             android:background="#ffffff"
             android:foreground="@drawable/bbishop"
-            android:onClick="pawnChoice"
+            android:onClick="upgradePiece"
             android:padding="5sp"
             android:textAlignment="center"
             android:textSize="12sp" />
@@ -1012,7 +1025,7 @@
             android:layout_margin="5sp"
             android:background="#ffffff"
             android:foreground="@drawable/brook"
-            android:onClick="pawnChoice"
+            android:onClick="upgradePiece"
             android:padding="5sp"
             android:textAlignment="center"
             android:textSize="12sp" />
@@ -1024,7 +1037,7 @@
             android:layout_margin="5sp"
             android:background="#ffffff"
             android:foreground="@drawable/bknight"
-            android:onClick="pawnChoice"
+            android:onClick="upgradePiece"
             android:padding="5sp"
             android:textAlignment="center"
             android:textSize="12sp" />
@@ -1044,6 +1057,20 @@
         android:textAlignment="center"
         android:textSize="36sp"
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/gameLog"
+        android:layout_width="172dp"
+        android:layout_height="49dp"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="3dp"
+        android:paddingBottom="10dp"
+        android:text="@string/wturn"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

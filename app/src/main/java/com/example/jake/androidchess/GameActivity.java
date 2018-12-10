@@ -30,4 +30,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    public void upgradePiece(View v){
+
+    }
 }

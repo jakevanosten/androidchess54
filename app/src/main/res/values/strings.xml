@@ -3,7 +3,12 @@
     <string name="logoName">Chess Logo</string>
     <string name="playText">Play Game</string>
     <string name="recordText">Recorded Games</string>
+    <string name="ai">AUTO MOVE</string>
     <string name="undo">UNDO</string>
     <string name="g_o">GAME OVER</string>
     <string name="upgrade">Pawn Upgrade:</string>
+    <string name="wturn">White Turn</string>
+    <string name="bturn">Black Turn</string>
+    <string name="wturn2">Must move white.</string>
+    <string name="bturn2">Must move black.</string>
 </resources>
