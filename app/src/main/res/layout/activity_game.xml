@@ -13,10 +13,10 @@
         android:layout_height="320dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:background="#FFF"
         android:fadeScrollbars="false"
         android:fadingEdge="horizontal|vertical"
         android:fadingEdgeLength="10dp"
-        android:background="#FFF"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
         android:visibility="visible"
@@ -512,8 +512,8 @@
             android:layout_height="40dp"
             android:background="#54a838"
             android:contentDescription="@null"
-            android:padding="5dp"
             android:onClick="move"
+            android:padding="5dp"
             app:srcCompat="@drawable/wpawn" />
 
         <ImageView
@@ -608,8 +608,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#a9d49b"
-            android:onClick="move"
             android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/wqueen" />
 
         <ImageView
@@ -617,8 +617,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#54a838"
-            android:onClick="move"
             android:contentDescription="@null"
+            android:onClick="move"
             app:srcCompat="@drawable/wking" />
 
         <ImageView

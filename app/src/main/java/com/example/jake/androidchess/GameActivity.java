@@ -14,50 +14,67 @@ public class GameActivity extends AppCompatActivity {
 
     boolean firstClickFlag = true;
     View space1,space2;
-    android.support.v7.widget.GridLayout grid;
-    int row,col = 0;
+    android.widget.GridLayout grid;
+    int firstLoc;
     int space1Color,space2Color;
+    View[] pieceOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
     }
 
     public void move(View v){
 
+
         if(firstClickFlag){ //first time clicking a space, store the imageview info for next click
             space1 = v;
             space1Color = ((ColorDrawable) v.getBackground()).getColor();
-            int[] locations = getPieceIndex(v);
-            row = locations[0];
-            col = locations[1];
+            firstLoc = getPieceIndex(v);
             v.setBackgroundColor(Color.CYAN);
-            System.out.println("Hi");
             firstClickFlag = false;
+
         }else{ //second space clicked, time to do the move
+
+            grid = findViewById(R.id.board);
+            for(int i=0;i<64;i++){
+                pieceOrder[i] = grid.getChildAt(i);
+            }
+
+
             space2 = v;
-            int[] newLoc = getPieceIndex(v);
+            space2Color = ((ColorDrawable) v.getBackground()).getColor();
+            int newLoc = getPieceIndex(v);
+
+            grid = findViewById(R.id.board);
+            space1.setBackgroundColor(space2Color);
+            space2.setBackgroundColor(space1Color);
+
+            View temp = space1;
+            pieceOrder[firstLoc] = space2;
+            pieceOrder[newLoc] = temp;
+
+            grid = new GridLayout(this);
+            for(int i=0;i<63;i++){
+                grid.addView(pieceOrder[i],i);
+            }
 
             firstClickFlag = true;
         }
     }
 
-    public int[] getPieceIndex(View v){
+    public int getPieceIndex(View v){
         grid = findViewById(R.id.board);
-        int[] location = new int[2];
         int childCount = grid.getChildCount();
-        for(int i=0;i<childCount;i++){
-            if(v.equals((View) grid.getChildAt(i))){
-                location[0] = i/8;
-                location[1] = i%8;
-                break;
-            }else{
-                location[0] = -1;
-                location[1] = -1;
+
+        for(int i=0;i<childCount;i++) {
+            if (v.equals((View) grid.getChildAt(i))) {
+                return i;
             }
         }
-        return location;
+        return -1;
     }
 
 
