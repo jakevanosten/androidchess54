@@ -3,5 +3,7 @@
     <string name="logoName">Chess Logo</string>
     <string name="playText">Play Game</string>
     <string name="recordText">Recorded Games</string>
-
+    <string name="undo">UNDO</string>
+    <string name="g_o">GAME OVER</string>
+    <string name="upgrade">Pawn Upgrade:</string>
 </resources>
