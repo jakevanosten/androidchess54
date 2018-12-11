@@ -72,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
         GridLayout gridLayout = findViewById(R.id.pieceSpots);
 
         initInternalBoard();
-        initDisplay();
+        //initDisplay();
     }
 
     public void move(View v){
@@ -80,6 +80,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /*
     public void initDisplay(){
 
         int i,j;
@@ -92,15 +93,95 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    */
+
     private void initInternalBoard(){
-        int i,j;
+
+        //set black special pieces
+        internalBoard[0][0].setPiece(bR1);
+        internalBoard[1][0].setPiece(bN1);
+        internalBoard[2][0].setPiece(bB1);
+        internalBoard[3][0].setPiece(bQ);
+        internalBoard[4][0].setPiece(bK);
+        internalBoard[5][0].setPiece(bB2);
+        internalBoard[6][0].setPiece(bN2);
+        internalBoard[7][0].setPiece(bR2);
+
+        //set black pawns
+        internalBoard[0][1].setPiece(bp1);
+        internalBoard[1][1].setPiece(bp2);
+        internalBoard[2][1].setPiece(bp3);
+        internalBoard[3][1].setPiece(bp4);
+        internalBoard[4][1].setPiece(bp5);
+        internalBoard[5][1].setPiece(bp6);
+        internalBoard[6][1].setPiece(bp7);
+        internalBoard[7][1].setPiece(bp8);
+
+        //set white pawns
+        internalBoard[0][6].setPiece(wp1);
+        internalBoard[1][6].setPiece(wp2);
+        internalBoard[2][6].setPiece(wp3);
+        internalBoard[3][6].setPiece(wp4);
+        internalBoard[4][6].setPiece(wp5);
+        internalBoard[5][6].setPiece(wp6);
+        internalBoard[6][6].setPiece(wp7);
+
+        //set white pieces
+        internalBoard[0][7].setPiece(wR1);
+        internalBoard[1][7].setPiece(wN1);
+        internalBoard[2][7].setPiece(wR1);
+        internalBoard[3][7].setPiece(wQ);
+        internalBoard[4][7].setPiece(wK);
+        internalBoard[5][7].setPiece(wR2);
+        internalBoard[6][7].setPiece(wN2);
+        internalBoard[7][7].setPiece(wR2);
 
 
+
+        printInternalBoard(internalBoard);
 
     }
 
+//for debugging&testing purposes
+   public void printInternalBoard(BoardIndex[][] internalBoard){
+
+        int i, j;
+
+        for(i = 0; i < 8; i++){
+            for(j = 0; j < 8; j++){
+
+                if (internalBoard[i][j].getPiece() instanceof Rook) {
+                    System.out.print("R ");
+                }
+
+                else if(internalBoard[i][j].getPiece() instanceof Knight){
+                    System.out.print("N ");
+                }
+
+                else if(internalBoard[i][j].getPiece() instanceof  Bishop){
+                    System.out.print("B ");
+                }
+
+                else if(internalBoard[i][j].getPiece() instanceof Queen){
+                    System.out.print("Q ");
+
+                }
+
+                else if(internalBoard[i][j].getPiece() instanceof King){
+                    System.out.print("K ");
+
+                }
+
+                else if(internalBoard[i][j].getPiece() instanceof Pawn){
+                    System.out.print("P ");
+
+                }
+
+            }
+        }
 
 
+   }
 
     public void undo(View v){
 
