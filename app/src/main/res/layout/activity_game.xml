@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/undo_button2"
-        android:layout_width="118dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -56,315 +56,367 @@
             android:id="@+id/ind30"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="30"/>
 
         <TextView
             android:id="@+id/ind40"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="40"/>
 
         <TextView
             android:id="@+id/ind50"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="50"/>
 
         <TextView
 
             android:id="@+id/ind60"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="60"/>
 
         <TextView
             android:id="@+id/ind70"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="70"/>
 
         <TextView
 
             android:id="@+id/ind01"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="01"/>
 
         <TextView
             android:id="@+id/ind11"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="11"/>
 
         <TextView
             android:id="@+id/ind21"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="21"/>
 
         <TextView
             android:id="@+id/ind31"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="31"/>
 
         <TextView
             android:id="@+id/ind41"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="41"/>
 
         <TextView
             android:id="@+id/ind51"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="51"/>
 
         <TextView
             android:id="@+id/ind61"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="61"/>
 
         <TextView
             android:id="@+id/ind71"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="71"/>
 
         <TextView
             android:id="@+id/ind02"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="02"/>
 
         <TextView
             android:id="@+id/ind12"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="12"/>
 
         <TextView
             android:id="@+id/ind22"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="22"/>
 
         <TextView
             android:id="@+id/ind32"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="32"/>
 
         <TextView
             android:id="@+id/ind42"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="42"/>
 
         <TextView
             android:id="@+id/ind52"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="52"/>
 
         <TextView
             android:id="@+id/ind62"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="62"/>
 
         <TextView
             android:id="@+id/ind72"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="72"/>
 
         <TextView
             android:id="@+id/ind03"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="03"/>
 
         <TextView
             android:id="@+id/ind13"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="13"/>
 
         <TextView
             android:id="@+id/ind23"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="23"/>
 
         <TextView
             android:id="@+id/ind33"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="33"/>
 
         <TextView
             android:id="@+id/ind43"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="43"/>
 
         <TextView
             android:id="@+id/ind53"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="53"/>
 
         <TextView
             android:id="@+id/ind63"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="63"/>
 
         <TextView
             android:id="@+id/ind73"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="73"/>
 
         <TextView
             android:id="@+id/ind04"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="04"/>
 
         <TextView
             android:id="@+id/ind14"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="14"/>
 
         <TextView
             android:id="@+id/ind24"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="24"/>
 
         <TextView
             android:id="@+id/ind34"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="34"/>
 
         <TextView
             android:id="@+id/ind44"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="44"/>
 
         <TextView
             android:id="@+id/ind54"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="54"/>
 
         <TextView
             android:id="@+id/ind64"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="64"/>
 
         <TextView
             android:id="@+id/ind74"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="74"/>
 
         <TextView
             android:id="@+id/ind05"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="05"/>
 
         <TextView
             android:id="@+id/ind15"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="15"/>
 
         <TextView
             android:id="@+id/ind25"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="25"/>
 
         <TextView
             android:id="@+id/ind35"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="35"/>
 
         <TextView
             android:id="@+id/ind45"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="45"/>
 
         <TextView
             android:id="@+id/ind55"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="55"/>
 
         <TextView
             android:id="@+id/ind65"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="65"/>
 
         <TextView
             android:id="@+id/ind75"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="75"/>
 
         <TextView
             android:id="@+id/ind06"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="06"/>
 
         <TextView
             android:id="@+id/ind16"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="16"/>
 
         <TextView
             android:id="@+id/ind26"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="26"/>
 
         <TextView
             android:id="@+id/ind36"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="36"/>
 
         <TextView
             android:id="@+id/ind46"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="46"/>
 
         <TextView
             android:id="@+id/ind56"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="56"/>
 
         <TextView
             android:id="@+id/ind66"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="20"/>
 
         <TextView
             android:id="@+id/ind76"
@@ -448,49 +500,56 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="10" />
 
         <TextView
             android:id="@+id/bb1"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="20" />
 
         <TextView
             android:id="@+id/bq"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="30" />
 
         <TextView
             android:id="@+id/bk"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="40"/>
 
         <TextView
             android:id="@+id/bb2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="50"/>
 
         <TextView
             android:id="@+id/bk2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="60"/>
 
         <TextView
             android:id="@+id/br2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="70"/>
 
         <TextView
             android:id="@+id/bp1"
@@ -498,7 +557,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="01"/>
 
         <TextView
             android:id="@+id/bp2"
@@ -506,7 +566,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="11"/>
 
         <TextView
             android:id="@+id/bp3"
@@ -514,7 +575,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="21"/>
 
         <TextView
             android:id="@+id/bp4"
@@ -522,7 +584,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="31"/>
 
         <TextView
             android:id="@+id/bp5"
@@ -530,7 +593,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="41"/>
 
         <TextView
             android:id="@+id/bp6"
@@ -538,7 +602,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="51"/>
 
         <TextView
             android:id="@+id/bp7"
@@ -546,7 +611,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="61"/>
 
         <TextView
             android:id="@+id/bp8"
@@ -554,7 +620,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="71"/>
 
         <TextView
             android:id="@+id/b1"
@@ -562,7 +629,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="02"/>
 
         <TextView
             android:id="@+id/b2"
@@ -570,7 +638,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="12"/>
 
         <TextView
             android:id="@+id/b3"
@@ -578,7 +647,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="22"/>
 
         <TextView
             android:id="@+id/b4"
@@ -586,7 +656,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="32"/>
 
         <TextView
             android:id="@+id/b5"
@@ -594,7 +665,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="42"/>
 
         <TextView
             android:id="@+id/b6"
@@ -602,7 +674,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="52"/>
 
         <TextView
             android:id="@+id/b7"
@@ -610,7 +683,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="62"/>
 
         <TextView
             android:id="@+id/b8"
@@ -618,7 +692,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="72"/>
 
         <TextView
             android:id="@+id/b9"
@@ -626,7 +701,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="03"/>
 
         <TextView
             android:id="@+id/b10"
@@ -634,7 +710,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="13"/>
 
         <TextView
             android:id="@+id/b11"
@@ -642,7 +719,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="23"/>
 
         <TextView
             android:id="@+id/b12"
@@ -650,7 +728,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="33"/>
 
         <TextView
             android:id="@+id/b13"
@@ -658,7 +737,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="43"/>
 
         <TextView
             android:id="@+id/b14"
@@ -666,7 +746,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="53"/>
 
         <TextView
             android:id="@+id/b15"
@@ -674,7 +755,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="63"/>
 
         <TextView
             android:id="@+id/b16"
@@ -682,7 +764,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="73"/>
 
         <TextView
             android:id="@+id/b17"
@@ -690,7 +773,8 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="04"/>
 
         <TextView
             android:id="@+id/b18"
@@ -698,269 +782,271 @@
             android:layout_height="40dp"
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="14"/>
 
         <TextView
             android:id="@+id/b19"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="24"/>
 
         <TextView
             android:id="@+id/b20"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="34"/>
 
         <TextView
             android:id="@+id/b21"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="44"/>
 
         <TextView
             android:id="@+id/b22"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="54"/>
 
         <TextView
             android:id="@+id/b23"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="64"/>
 
         <TextView
             android:id="@+id/b24"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="74"/>
 
         <TextView
             android:id="@+id/b25"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="05"/>
 
         <TextView
             android:id="@+id/b26"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="15"/>
 
         <TextView
             android:id="@+id/b27"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="25"/>
 
 
         <TextView
             android:id="@+id/b28"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="35"/>
 
         <TextView
             android:id="@+id/b29"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="45"/>
 
         <TextView
             android:id="@+id/b30"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="55"/>
 
         <TextView
             android:id="@+id/b31"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="65"/>
 
         <TextView
             android:id="@+id/b32"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="75"/>
 
         <TextView
             android:id="@+id/wp1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="06"/>
 
         <TextView
             android:id="@+id/wp2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="16"/>
 
         <TextView
             android:id="@+id/wp3"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="26"/>
 
         <TextView
             android:id="@+id/wp4"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="36"/>
 
         <TextView
             android:id="@+id/wp5"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="46"/>
 
         <TextView
             android:id="@+id/wp6"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="56"/>
 
         <TextView
             android:id="@+id/wp7"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="66"/>
 
         <TextView
             android:id="@+id/wp8"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
             android:onClick="move"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:tag="76"/>
 
         <TextView
             android:id="@+id/wr1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="07"/>
 
         <TextView
             android:id="@+id/wk1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="17"/>
 
         <TextView
             android:id="@+id/wb1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="27"/>
 
         <TextView
             android:id="@+id/wq"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="37"/>
 
         <TextView
             android:id="@+id/wk"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="47"/>
 
         <TextView
             android:id="@+id/wb2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="57"/>
 
         <TextView
             android:id="@+id/wk2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="67"/>
 
         <TextView
             android:id="@+id/wr2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="77"/>
 
     </GridLayout>
 
@@ -1064,17 +1150,17 @@
 
     <TextView
         android:id="@+id/gameLog"
-        android:layout_width="172dp"
-        android:layout_height="49dp"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
         android:layout_alignStart="@+id/textView2"
         android:layout_alignParentTop="true"
+        android:paddingStart="3dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
-        android:paddingStart="3dp"
         android:paddingBottom="10dp"
         android:text="@string/wturn"
         android:textColor="@color/cardview_light_background"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
 
 </RelativeLayout>

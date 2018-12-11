@@ -7,8 +7,8 @@
     <string name="undo">UNDO</string>
     <string name="g_o">GAME OVER</string>
     <string name="upgrade">Pawn Upgrade:</string>
-    <string name="wturn">White Turn</string>
-    <string name="bturn">Black Turn</string>
-    <string name="wturn2">Must move white.</string>
-    <string name="bturn2">Must move black.</string>
+    <string name="wturn">White: Choose Piece</string>
+    <string name="bturn">Black: Choose Piece</string>
+    <string name="wturn2">White: Choose Destination</string>
+    <string name="bturn2">Black: Choose Destination</string>
 </resources>

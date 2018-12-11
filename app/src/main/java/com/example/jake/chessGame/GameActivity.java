@@ -64,10 +64,12 @@ public class GameActivity extends AppCompatActivity {
     public TextView[][] chessBoard = new TextView[8][8];
     public BoardIndex[][] internalBoard = new BoardIndex[8][8];
     public BoardIndex[][] undoBoard = new BoardIndex[8][8];
-    boolean whiteTurn = true;
     public TextView go;
-    Locations click = new Locations(0,0);
+    public TextView gameLog;
     boolean firstClickFlag = true;
+    Locations lastClick = new Locations(0,0);
+    Locations firstClick = new Locations(0,0);
+    boolean whiteTurn = true;
     GridLayout grid;
 
     @Override
@@ -78,22 +80,144 @@ public class GameActivity extends AppCompatActivity {
         initInternalBoard();
         initDisplay();
         go = findViewById(R.id.game_over);
+        gameLog = findViewById(R.id.gameLog);
     }
 
     public void move(View v) {
 
         String t = v.getTag().toString();
-        char r = t.charAt(0);
-        char c = t.charAt(1);
-        int row = r - '0';
+        char c = t.charAt(0);
+        char r = t.charAt(1);
         int col = c - '0';
-        click.setX(col);
-        click.setY(row);
+        int row = r - '0';
 
         if(firstClickFlag){
+            if(internalBoard[row][col].getPiece() == null){
+                return;
+            }else if((internalBoard[row][col].getPiece().getColor() == 0) && !(whiteTurn)){//clicked on wrong team
+                return;
+            }else{
+                System.out.println(row + "," + col);
+                firstClickFlag = false;
+                firstClick.setX(row);
+                firstClick.setY(col);
+                if(whiteTurn){
+                    gameLog.setText("White: Choose Destination");
+                }else{
+                    gameLog.setText("Black: Choose Destination");
+                }
 
+                return;
+            }
+
+        }else{
+            if(internalBoard[row][col].getPiece() == null){ //empty space
+                System.out.println(row + "," + col);
+                Rook rk = null;
+                Knight kn = null;
+                Bishop bi = null;
+                Queen qu = null;
+                King ki = null;
+                Pawn pa = null;
+
+                if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                else{ pa = (Pawn) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+
+                //String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
+                //System.out.println(result);
+
+                if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(row,col),internalBoard)) { //valid move
+
+
+                    System.out.println(row + "," + col);
+                    saveBoard();
+                    Locations newLoc = new Locations(row, col);
+
+                    internalBoard[row][col].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
+                    internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+
+
+                    firstClickFlag = true;
+                    whiteTurn = !(whiteTurn);
+                    if(whiteTurn){
+                        gameLog.setText("White: Choose Piece");
+                    }else{
+                        gameLog.setText("Black: Choose Piece");
+                    }
+                    checkForCheck();
+                    checkUpgrade();
+                }else{ //move not valid
+                    return;
+                }
+            }else{//piece in space
+                if((internalBoard[row][col].getPiece().getColor() == 0) == (whiteTurn)){ //diff team
+                    System.out.println(row + "," + col);
+
+                    Rook rk = null;
+                    Knight kn = null;
+                    Bishop bi = null;
+                    Queen qu = null;
+                    King ki = null;
+                    Pawn pa = null;
+
+                    if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                    else{ pa = (Pawn) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+
+                    //String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
+                    //System.out.println(result);
+
+                    if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(row,col),internalBoard)) { //valid move
+
+                        System.out.println(row + "," + col);
+                        saveBoard();
+                        Locations newLoc = new Locations(row, col);
+
+                        internalBoard[row][col].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
+                        internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+
+                        if (internalBoard[row][col].getPiece() instanceof King) {
+                            go.setVisibility(View.VISIBLE);
+                            gameLog.setText("Recording Saved.");
+                            //save recording
+                            System.exit(0);
+                        }
+
+                        firstClickFlag = true;
+                        whiteTurn = !(whiteTurn);
+                        if(whiteTurn){
+                            gameLog.setText("White: Choose Piece");
+                        }else{
+                            gameLog.setText("Black: Choose Piece");
+                        }
+                        checkForCheck();
+                        checkUpgrade();
+                    }else{ //move not valid
+                        return;
+                    }
+
+                }else{//same team
+                    return;
+                }
+            }
         }
+        checkForCheck();
+        lastClick.setX(row);
+        lastClick.setY(col);
+        loadPieces();
+    }
 
+    private void saveBoard() {
+    }
+
+    private void checkUpgrade() {
     }
 
 

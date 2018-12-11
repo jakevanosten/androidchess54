@@ -38,7 +38,7 @@ public class GamePiece{
 	}
 	
 	public boolean isValidLoc(Locations curr, Locations next, BoardIndex[][] board) {
-		if(board[curr.getX()][curr.getY()] == null){
+		if(board[curr.getX()][curr.getY()].getPiece() == null){
 			return false;
 		}
 
@@ -46,7 +46,7 @@ public class GamePiece{
 
 		int currColor = curCell.whiteOrBlack;
 
-		if(board[next.getX()][next.getY()] == null){
+		if(board[next.getX()][next.getY()].getPiece() == null){
 			return true;
 		}
 		GamePiece nxtCell = board[next.getX()][next.getY()].getPiece();
@@ -71,28 +71,28 @@ public class GamePiece{
 		 */
 		if(currCol == nextCol && currRow != nextRow && currRow < nextRow) { //check each row on path - moving down the board
 			for(int i=currRow+1;i<=nextRow;i++) {
-				if(board[i][currCol] != null) { //piece in the way
+				if(board[i][currCol].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol == nextCol && currRow != nextRow && currRow > nextRow) { //moving up
 			for(int i=currRow-1;i>=nextRow;i--) {
-				if(board[i][currCol] != null) { //piece in the way
+				if(board[i][currCol].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol < nextCol) { //moving right
 			for(int i=currCol+1;i<=nextCol;i++) {
-				if(board[currRow][i] != null) { //piece in the way
+				if(board[currRow][i].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol > nextCol) { //moving left
 			for(int i=currCol-1;i>=nextCol;i--) {
-				if(board[currRow][i] != null) { //piece in the way
+				if(board[currRow][i].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
@@ -102,7 +102,7 @@ public class GamePiece{
 			if(nextCol>currCol && nextRow>currRow) {//down and right
 				k = currRow+1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(board[k][i] != null) { //piece in the way
+					if(board[k][i].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k++;
@@ -111,7 +111,7 @@ public class GamePiece{
 			}else if(nextCol>currCol && nextRow<currRow) {//up and right
 				k = currRow-1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(board[k][i] != null) { //piece in the way
+					if(board[k][i].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k--;
@@ -120,7 +120,7 @@ public class GamePiece{
 			}else if(nextCol<currCol && nextRow>currRow) {//down and left
 				k = currRow+1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(board[k][i] != null) { //piece in the way
+					if(board[k][i].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k++;
@@ -129,7 +129,7 @@ public class GamePiece{
 			}else { //up and left
 				k = currRow-1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(board[k][i] != null) { //piece in the way
+					if(board[k][i].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k--;
