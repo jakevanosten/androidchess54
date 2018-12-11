@@ -19,6 +19,406 @@
         android:text="@string/ai" />
 
     <GridLayout
+        android:id="@+id/gridColors"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:columnCount="8"
+        android:fadeScrollbars="false"
+        android:fadingEdge="none"
+        android:rowCount="8"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/ind00"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind10"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind20"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind30"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind40"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind50"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+
+            android:id="@+id/ind60"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind70"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+
+            android:id="@+id/ind01"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind11"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind21"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind31"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind41"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind51"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind61"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind71"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind02"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind12"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind22"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind32"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind42"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind52"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind62"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind72"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind03"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind13"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind23"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind33"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind43"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind53"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind63"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind73"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind04"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind14"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind24"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind34"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind44"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind54"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind64"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind74"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind05"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind15"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind25"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind35"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind45"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind55"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind65"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind75"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind06"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind16"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind26"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind36"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind46"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind56"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind66"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind76"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind07"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind17"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind27"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind37"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind47"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind57"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+
+        <TextView
+            android:id="@+id/ind67"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardLight" />
+
+        <TextView
+            android:id="@+id/ind77"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/boardDark" />
+    </GridLayout>
+
+    <GridLayout
         android:id="@+id/pieceSpots"
         android:layout_width="320dp"
         android:layout_height="320dp"
@@ -558,406 +958,6 @@
             android:contentDescription="@null"
             android:onClick="move" />
 
-    </GridLayout>
-
-    <GridLayout
-        android:id="@+id/gridColors"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:columnCount="8"
-        android:fadeScrollbars="false"
-        android:fadingEdge="none"
-        android:rowCount="8"
-        android:visibility="visible">
-
-        <TextView
-            android:id="@+id/ind00"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind10"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind20"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind30"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind40"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind50"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-
-            android:id="@+id/ind60"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind70"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-
-            android:id="@+id/ind01"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind11"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind21"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind31"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind41"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind51"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind61"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind71"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind02"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind12"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind22"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind32"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind42"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind52"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind62"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind72"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind03"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind13"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind23"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind33"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind43"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind53"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind63"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind73"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind04"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind14"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind24"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind34"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind44"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind54"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind64"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind74"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind05"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind15"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind25"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind35"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind45"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind55"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind65"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind75"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind06"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind16"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind26"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind36"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind46"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind56"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind66"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind76"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind07"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind17"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind27"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind37"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind47"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind57"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
-
-        <TextView
-            android:id="@+id/ind67"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardLight" />
-
-        <TextView
-            android:id="@+id/ind77"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/boardDark" />
     </GridLayout>
 
     <Button

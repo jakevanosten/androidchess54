@@ -103,12 +103,7 @@ public class GameActivity extends AppCompatActivity {
     public void loadPieces(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
-
-                if(internalBoard[i][j].getPiece() == null){
-                    chessBoard[i][j].setBackgroundResource(0);
-                }else {
                     GamePiece gp = internalBoard[i][j].getPiece();
-
                     if (gp instanceof Pawn) {
                         if (gp.getColor() == 0) {
                             chessBoard[i][j].setBackgroundResource(R.drawable.wpawn);
@@ -147,7 +142,6 @@ public class GameActivity extends AppCompatActivity {
                         }
                     }
                 }
-            }
         }
         checkForCheck();
     }
@@ -194,10 +188,10 @@ public class GameActivity extends AppCompatActivity {
         //set white pieces
         internalBoard[0][7].setPiece(wR1);
         internalBoard[1][7].setPiece(wN1);
-        internalBoard[2][7].setPiece(wR1);
+        internalBoard[2][7].setPiece(wB1);
         internalBoard[3][7].setPiece(wQ);
         internalBoard[4][7].setPiece(wK);
-        internalBoard[5][7].setPiece(wR2);
+        internalBoard[5][7].setPiece(wB2);
         internalBoard[6][7].setPiece(wN2);
         internalBoard[7][7].setPiece(wR2);
 
@@ -212,8 +206,8 @@ public class GameActivity extends AppCompatActivity {
 
         int i, j;
 
-        for(i = 0; i < 8; i++){
-            for(j = 0; j < 8; j++){
+        for(j = 0; j < 8; j++){
+            for(i = 0; i < 8; i++){
 
                 if (internalBoard[i][j].getPiece() instanceof Rook) {
                     System.out.print("R ");
@@ -243,6 +237,7 @@ public class GameActivity extends AppCompatActivity {
                 }
 
             }
+            System.out.println();
         }
 
 
