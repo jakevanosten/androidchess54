@@ -12,7 +12,7 @@ public class Pawn extends GamePiece{
 	
 	public boolean isFirstMove(Locations curr) {
 		
-		if((this.whiteOrBlack == 1 && curr.getY() == 1) || (this.whiteOrBlack == 0 && curr.getY() == 6)){
+		if((this.getColor() == 1 && curr.getY() == 1) || (this.getColor() == 0 && curr.getY() == 6)){
 			return true;
 		}
 		return false;
@@ -24,7 +24,7 @@ public class Pawn extends GamePiece{
 			return false;
 		}
 
-		int currColor = currPiece.whiteOrBlack;
+		int currColor = currPiece.getColor();
 
 		if(currColor == 0 && next.getY() == 0) { //white pawn reaching top row of board
 			return true;
@@ -38,10 +38,10 @@ public class Pawn extends GamePiece{
 		GamePiece currPiece = board[curr.getX()][curr.getY()].getPiece();
 		GamePiece nxtPiece = board[next.getX()][next.getY()].getPiece();
 
-		int currColor = currPiece.whiteOrBlack;
+		int currColor = currPiece.getColor();
 
 		if(nxtPiece != null) {
-			if (nxtPiece.whiteOrBlack != currColor) { //same color in next, can't move
+			if (nxtPiece.getColor() != currColor) {
 				return true;
 			}
 			return false;
@@ -59,13 +59,13 @@ public class Pawn extends GamePiece{
 			promotionFlag = 1;
 		}
 
-		if(isFirstMove(curr) && val && path && ((isUp(curr,next,board) && this.whiteOrBlack == 0) || (isDown(curr,next,board) && this.whiteOrBlack == 1))) {//can move two spaces
+		if(isFirstMove(curr) && val && path && ((isUp(curr,next,board) && this.getColor() == 0) || (isDown(curr,next,board) && this.getColor() == 1))) {//can move two spaces
 			int currRow = curr.getY();
 			int nextRow = next.getY();
 
 			if(isOneSpace(curr,next,board) && isDiag(curr,next,board) && oppInSpace(curr,next,board)) { return true; } //first move is a capture
 
-			if(((nextRow==currRow+2 || nextRow==currRow+1) && this.whiteOrBlack == 0) || ((nextRow==currRow-2 || nextRow==currRow-1) && this.whiteOrBlack == 1)) {
+			if(((nextRow==currRow-2 || nextRow==currRow-1) && this.getColor() == 0) || ((nextRow==currRow+2 || nextRow==currRow+1) && this.getColor() == 1)) {
 				return true;
 			}
 
@@ -76,7 +76,7 @@ public class Pawn extends GamePiece{
 
 			if(isDiag(curr,next,board) && oppInSpace(curr,next,board)) { //valid capture
 				return true;
-			}else if((isUp(curr,next,board) && this.whiteOrBlack == 0) || (isDown(curr,next,board) && this.whiteOrBlack == 1)) {return true;} //moving white up or black down
+			}else if((isUp(curr,next,board) && this.getColor() == 0) || (isDown(curr,next,board) && this.getColor() == 1)) {return true;} //moving white up or black down
 		}
 		return false;
 	}

@@ -66,11 +66,13 @@ public class GameActivity extends AppCompatActivity {
     public BoardIndex[][] undoBoard = new BoardIndex[8][8];
     public TextView go;
     public TextView gameLog;
+    String lastTurnLog = "White: Choose Piece";
     boolean firstClickFlag = true;
     Locations lastClick = new Locations(0,0);
     Locations firstClick = new Locations(0,0);
     boolean whiteTurn = true;
     GridLayout grid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,17 +88,17 @@ public class GameActivity extends AppCompatActivity {
     public void move(View v) {
 
         String t = v.getTag().toString();
-        char r = t.charAt(0);
-        char c = t.charAt(1);
+        char c = t.charAt(0);
+        char r = t.charAt(1);
         int row = r - '0';
         int col = c - '0';
 
-        if(firstClickFlag){
-            if(internalBoard[col][row].getPiece() == null){
+        if(firstClickFlag){ //first click
+            if(internalBoard[col][row].getPiece() == null){ //clicked on empty space, do nothing
                 return;
-            }else if((internalBoard[col][row].getPiece().getColor() == 0) && !(whiteTurn)){//clicked on wrong team
+            }else if((internalBoard[col][row].getPiece().getColor() == 0) != (whiteTurn)){//clicked on wrong team, do nothing
                 return;
-            }else{
+            }else{ //clicked on correct team
                 firstClickFlag = false;
                 firstClick.setX(col);
                 firstClick.setY(row);
@@ -109,8 +111,10 @@ public class GameActivity extends AppCompatActivity {
                 return;
             }
 
-        }else{
-            if(internalBoard[col][row].getPiece() == null){ //empty space
+        }else{ //second click
+            if(internalBoard[col][row].getPiece() == null){ //empty destination, check if valid move
+
+                GamePiece curr = internalBoard[firstClick.getX()][firstClick.getY()].getPiece();
 
                 Rook rk = null;
                 Knight kn = null;
@@ -119,27 +123,32 @@ public class GameActivity extends AppCompatActivity {
                 King ki = null;
                 Pawn pa = null;
 
-                if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                else{ pa = (Pawn) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                if (curr instanceof Rook){ rk = (Rook) curr;}
+                else if (curr instanceof Knight){ kn = (Knight) curr;}
+                else if (curr instanceof Bishop){ bi = (Bishop) curr;}
+                else if (curr instanceof Queen){ qu = (Queen) curr;}
+                else if (curr instanceof King){ ki = (King) curr;}
+                else{ pa = (Pawn) curr;}
 
                 String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
                 System.out.println(result);
 
-                if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
+                if(((rk!=null) ?
+                        rk : ((kn!=null) ?
+                        kn : ((bi!=null) ?
+                        bi : ((qu!=null) ?
+                        qu : ((ki!=null) ?
+                        ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //is a valid move
 
                     saveBoard();
-                    Locations newLoc = new Locations(col, row);
 
-                    internalBoard[row][col].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
+                    internalBoard[col][row].setPiece(curr);
                     internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
-                    chessBoard[newLoc.getX()][newLoc.getY()].setBackgroundResource(0);
+                    chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
 
                     firstClickFlag = true;
                     whiteTurn = !(whiteTurn);
+                    lastTurnLog = gameLog.getText().toString();
                     if(whiteTurn){
                         gameLog.setText("White: Choose Piece");
                     }else{
@@ -147,11 +156,19 @@ public class GameActivity extends AppCompatActivity {
                     }
                     checkForCheck();
                     checkUpgrade();
-                }else{ //move not valid
+                }else{ //move not valid, do nothing
+                    firstClickFlag = true;
+                    if(whiteTurn){
+                        gameLog.setText("White: Choose Piece");
+                    }else{
+                        gameLog.setText("Black: Choose Piece");
+                    }
                     return;
                 }
             }else{//piece in space
-                if((internalBoard[col][row].getPiece().getColor() == 0) == (whiteTurn)){ //diff team
+                if((internalBoard[col][row].getPiece().getColor() != internalBoard[firstClick.getX()][firstClick.getY()].getPiece().getColor())){ //diff team in space
+
+                    GamePiece curr = internalBoard[firstClick.getX()][firstClick.getY()].getPiece();
 
                     Rook rk = null;
                     Knight kn = null;
@@ -160,24 +177,28 @@ public class GameActivity extends AppCompatActivity {
                     King ki = null;
                     Pawn pa = null;
 
-                    if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
-                    else{ pa = (Pawn) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                    if (curr instanceof Rook){ rk = (Rook) curr;}
+                    else if (curr instanceof Knight){ kn = (Knight) curr;}
+                    else if (curr instanceof Bishop){ bi = (Bishop) curr;}
+                    else if (curr instanceof Queen){ qu = (Queen) curr;}
+                    else if (curr instanceof King){ ki = (King) curr;}
+                    else{ pa = (Pawn) curr;}
 
-                    //String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
-                    //System.out.println(result);
+                    String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
+                    System.out.println(result);
 
-                    if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
+                    if(((rk!=null) ?
+                            rk : ((kn!=null) ?
+                            kn : ((bi!=null) ?
+                            bi : ((qu!=null) ?
+                            qu : ((ki!=null) ?
+                            ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
 
                         saveBoard();
-                        Locations newLoc = new Locations(col, row);
 
-                        internalBoard[col][row].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
+                        internalBoard[col][row].setPiece(curr);
                         internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
-                        chessBoard[newLoc.getX()][newLoc.getY()].setBackgroundResource(0);
+                        chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
 
                         if (internalBoard[col][row].getPiece() instanceof King) {
                             go.setVisibility(View.VISIBLE);
@@ -188,6 +209,7 @@ public class GameActivity extends AppCompatActivity {
 
                         firstClickFlag = true;
                         whiteTurn = !(whiteTurn);
+                        lastTurnLog = gameLog.getText().toString();
                         if(whiteTurn){
                             gameLog.setText("White: Choose Piece");
                         }else{
@@ -196,6 +218,12 @@ public class GameActivity extends AppCompatActivity {
                         checkForCheck();
                         checkUpgrade();
                     }else{ //move not valid
+                        firstClickFlag = true;
+                        if(whiteTurn){
+                            gameLog.setText("White: Choose Piece");
+                        }else{
+                            gameLog.setText("Black: Choose Piece");
+                        }
                         return;
                     }
 
