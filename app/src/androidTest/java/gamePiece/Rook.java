@@ -1,23 +1,16 @@
 package gamePiece;
 
+import boardData.BoardIndex;
+import boardData.Locations;
+
 public class Rook extends GamePiece{
 
-	public String rookMove;
-	
-	public Rook(String tag, int wob) {
-		super(tag, wob);
+	public Rook(int wob) {
+		super(wob);
 	}
-	
-	public String getRookMove(){
-		return rookMove;
-	}
-	
-	public void setPawnMove(String tag){
-		rookMove = tag;
-	}
-	
-	public boolean tryMove(String curr, String next) {
-		if(isValidLoc(curr,next) && isPathClear(curr,next) && (isUp(curr,next) || isDown(curr,next) || isHoriz(curr,next))) {return true;}
+
+	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {
+		if(isValidLoc(curr,next,board) && isPathClear(curr,next,board) && (isUp(curr,next,board) || isDown(curr,next,board) || isHoriz(curr,next,board))) {return true;}
 		
 		return false;
 	}

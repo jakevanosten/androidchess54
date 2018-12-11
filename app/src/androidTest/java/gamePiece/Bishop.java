@@ -1,24 +1,16 @@
 package gamePiece;
 
+import boardData.BoardIndex;
+import boardData.Locations;
+
 public class Bishop extends GamePiece{
 
-	public String bishopMove;
-	
-	public Bishop(String tag, int wob) {
-		super(tag, wob);
+	public Bishop(int wob) {
+		super(wob);
 	}
 	
-	
-	public String getBishopMove(){
-		return bishopMove;
-	}
-	
-	public void setPawnMove(String tag){
-		bishopMove = tag;
-	}
-	
-	public boolean tryMove(String curr, String next) {
-		if(isValidLoc(curr,next) && isPathClear(curr,next) && isDiag(curr,next)) {return true;}
+	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {
+		if(isValidLoc(curr,next,board) && isPathClear(curr,next,board) && isDiag(curr,next,board)) {return true;}
 		
 		return false;
 	}

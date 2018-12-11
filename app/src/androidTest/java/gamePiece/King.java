@@ -1,23 +1,16 @@
 package gamePiece;
 
+import boardData.BoardIndex;
+import boardData.Locations;
+
 public class King extends GamePiece{
 
-	public String kingMove;
-	
-	public King(String tag, int wob) {
-		super(tag, wob);
+	public King(int wob) {
+		super(wob);
 	}
 	
-	public String getKingMove(){
-		return kingMove;
-	}
-	
-	public void setKingMove(String tag){
-		kingMove = tag;
-	}
-	
-	public boolean tryMove(String curr, String next) {
-		if(isValidLoc(curr,next) && isPathClear(curr,next) && isOneSpace(curr,next) && (isUp(curr,next) || isDown(curr,next) || isHoriz(curr,next) || isDiag(curr,next))) {
+	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {
+		if(isValidLoc(curr,next,board) && isPathClear(curr,next,board) && isOneSpace(curr,next,board) && (isUp(curr,next,board) || isDown(curr,next,board) || isHoriz(curr,next,board) || isDiag(curr,next,board))) {
 			return true;
 		}
 		return false;

@@ -1,13 +1,16 @@
 package gamePiece;
 
+import boardData.BoardIndex;
+import boardData.Locations;
+
 public class Knight extends GamePiece{
 
-	public Knight(String tag, int wob) {
-		super(tag, wob);
+	public Knight(int wob) {
+		super(wob);
 	}
 	
-	public boolean tryMove(String curr, String next) {
-		if(isValidLoc(curr,next) && isPathClear(curr,next) && isL(curr,next)) {return true;}
+	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {
+		if(isValidLoc(curr,next,board) && isPathClear(curr,next,board) && isL(curr,next,board)) {return true;}
 		
 		return false;
 	}

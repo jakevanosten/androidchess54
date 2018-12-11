@@ -1,12 +1,14 @@
 package gamePiece;
 
-import gameBoard.Board;
+import boardData.BoardIndex;
+import boardData.Locations;
 
-public class GamePiece extends CellType{
+public class GamePiece{
+
+
 	int whiteOrBlack;
 	
-	public GamePiece(String tag, int whiteOrBlack) {
-		super(tag);
+	public GamePiece(int whiteOrBlack) {
 		this.whiteOrBlack = whiteOrBlack;
 	}
 	
@@ -14,7 +16,7 @@ public class GamePiece extends CellType{
 		return whiteOrBlack;
 	}
 	
-	public boolean tryMove(String curr, String next) {return false;}; //going to be overridden by each piece since they have different standards for moving
+	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {return false;}; //going to be overridden by each piece since they have different standards for moving
 	
 	/*
 	 * DIFFERENT RULES
@@ -32,35 +34,36 @@ public class GamePiece extends CellType{
 	 *  9. IsOneSpace - move length restriction for pawns and kings
 	 */
 	
-	public boolean isOneSpace(String curr, String next) {
-		
-		
+	public boolean isOneSpace(Locations curr, Locations next,BoardIndex[][] board) {
 		return false;
 	}
 	
-	public boolean isValidLoc(String curr, String next) {
-		CellType curCell = Board.cells[Board.transRow(curr.charAt(1))][Board.transCol(curr.charAt(0))];
-		CellType nxtCell = Board.cells[Board.transRow(next.charAt(1))][Board.transCol(next.charAt(0))];
-		
-		GamePiece currPiece = (GamePiece) curCell;
-		int currColor = currPiece.whiteOrBlack;
-		
-		if(nxtCell instanceof BlankSpace) {
+	public boolean isValidLoc(Locations curr, Locations next, BoardIndex[][] board) {
+		if(board[curr.getX()][curr.getY()] == null){
+			return false;
+		}
+
+		GamePiece curCell = board[curr.getX()][curr.getY()].getPiece();
+
+		int currColor = curCell.whiteOrBlack;
+
+		if(board[next.getX()][next.getY()] == null){
 			return true;
-		}else { //game piece in cell
-			GamePiece gameCell = (GamePiece) nxtCell;
-			if (gameCell.whiteOrBlack == currColor) { //same color in next, can't move
+		}
+		GamePiece nxtCell = board[next.getX()][next.getY()].getPiece();
+
+			if (nxtCell.whiteOrBlack == currColor) { //same color in next, can't move
 				return false;
 			}
-		}
+
 		return true;
 	}
 	
-	public boolean isPathClear(String curr, String next) {
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+	public boolean isPathClear(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = next.getX();
+		int nextRow = curr.getY();
+		int nextCol = next.getX();
 		
 		/*DONE -if only row changes, move along the columns. 
 		 *DONE - if only col changes, move along the row.
@@ -69,28 +72,28 @@ public class GamePiece extends CellType{
 		 */
 		if(currCol == nextCol && currRow != nextRow && currRow < nextRow) { //check each row on path - moving down the board
 			for(int i=currRow+1;i<=nextRow;i++) {
-				if(Board.cells[i][currCol] instanceof GamePiece) { //piece in the way
+				if(board[i][currCol] != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol == nextCol && currRow != nextRow && currRow > nextRow) { //moving up
 			for(int i=currRow-1;i>=nextRow;i--) {
-				if(Board.cells[i][currCol] instanceof GamePiece) { //piece in the way
+				if(board[i][currCol] != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol < nextCol) { //moving right
 			for(int i=currCol+1;i<=nextCol;i++) {
-				if(Board.cells[currRow][i] instanceof GamePiece) { //piece in the way
+				if(board[currRow][i] != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol > nextCol) { //moving left
 			for(int i=currCol-1;i>=nextCol;i--) {
-				if(Board.cells[currRow][i] instanceof GamePiece) { //piece in the way
+				if(board[currRow][i] != null) { //piece in the way
 					return false;
 				}
 			}
@@ -100,7 +103,7 @@ public class GamePiece extends CellType{
 			if(nextCol>currCol && nextRow>currRow) {//down and right
 				k = currRow+1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(board[k][i] != null) { //piece in the way
 						return false;
 					}
 					k++;
@@ -109,7 +112,7 @@ public class GamePiece extends CellType{
 			}else if(nextCol>currCol && nextRow<currRow) {//up and right
 				k = currRow-1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(board[k][i] != null) { //piece in the way
 						return false;
 					}
 					k--;
@@ -118,7 +121,7 @@ public class GamePiece extends CellType{
 			}else if(nextCol<currCol && nextRow>currRow) {//down and left
 				k = currRow+1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(board[k][i] != null) { //piece in the way
 						return false;
 					}
 					k++;
@@ -127,7 +130,7 @@ public class GamePiece extends CellType{
 			}else { //up and left
 				k = currRow-1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(Board.cells[k][i] instanceof GamePiece) { //piece in the way
+					if(board[k][i] != null) { //piece in the way
 						return false;
 					}
 					k--;
@@ -138,11 +141,11 @@ public class GamePiece extends CellType{
 		return true;
 	}
 	
-	public boolean isUp(String curr, String next) {
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+	public boolean isUp(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = curr.getX();
+		int nextRow = next.getY();
+		int nextCol = next.getX();
 		
 		if (currCol == nextCol && currRow != nextRow && currRow > nextRow) { //moving up
 			return true;
@@ -150,11 +153,11 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
-	public boolean isDown(String curr, String next) {
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+	public boolean isDown(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = curr.getX();
+		int nextRow = next.getY();
+		int nextCol = next.getX();
 		
 		if (currCol == nextCol && currRow != nextRow && currRow < nextRow){ //moving up
 			return true;
@@ -162,11 +165,11 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
-	public boolean isHoriz(String curr, String next) {
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+	public boolean isHoriz(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = curr.getX();
+		int nextRow = next.getY();
+		int nextCol = next.getX();
 		
 		if (currCol != nextCol && currRow == nextRow) {
 			return true;
@@ -174,11 +177,11 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
-	public boolean isDiag(String curr, String next) {
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+	public boolean isDiag(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = curr.getX();
+		int nextRow = next.getY();
+		int nextCol = next.getX();
 		
 		if (nextCol-currCol==nextRow-currRow){
 			return true;
@@ -186,11 +189,11 @@ public class GamePiece extends CellType{
 		return false;
 	}
 	
-	public boolean isL(String curr, String next) {
-		int currRow = Board.transRow(curr.charAt(1));
-		int currCol = Board.transRow(curr.charAt(0));
-		int nextRow = Board.transRow(next.charAt(1));
-		int nextCol = Board.transRow(next.charAt(0));
+	public boolean isL(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = curr.getX();
+		int nextRow = next.getY();
+		int nextCol = next.getX();
 		
 		if ((nextCol-currCol==2 || currCol-nextCol==2) && (nextRow-currRow==1 || currRow-nextRow==1)) { //left or right 2 and up or down 1
 			return true;

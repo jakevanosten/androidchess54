@@ -1,23 +1,16 @@
 package gamePiece;
 
+import boardData.BoardIndex;
+import boardData.Locations;
+
 public class Queen extends GamePiece{
 
-	public String queenMove;
-	
-	public Queen(String tag, int wob) {
-		super(tag, wob);
+	public Queen(int wob) {
+		super(wob);
 	}
-	
-	public String getQueenMove(){
-		return queenMove;
-	}
-	
-	public void setqueenMove(String tag){
-		queenMove = tag;
-	}
-	
-	public boolean tryMove(String curr, String next) {
-		if(isValidLoc(curr,next) && isPathClear(curr,next) && (isUp(curr,next) || isDown(curr,next) || isHoriz(curr,next) || isDiag(curr,next))) {return true;}
+
+	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {
+		if(isValidLoc(curr,next,board) && isPathClear(curr,next,board) && (isUp(curr,next,board) || isDown(curr,next,board) || isHoriz(curr,next,board) || isDiag(curr,next,board))) {return true;}
 		
 		return false;
 	}

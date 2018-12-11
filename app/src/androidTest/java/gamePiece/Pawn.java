@@ -1,33 +1,25 @@
 package gamePiece;
 
+import boardData.BoardIndex;
+import boardData.Locations;
+
 public class Pawn extends GamePiece{
 
-	public String pawnMove;
-	
-	public Pawn(String tag, int wob) {
-		super(tag, wob);
-	}	
-	
-	/*
-	public String getPawnMove(){
-		return pawnMove;
+
+	public Pawn(int wob) {
+		super(wob);
 	}
 	
-	public void setPawnMove(String tag) {
-		pawnMove = tag;
-	}
-	*/
-	
-	public boolean isFirstMove(String curr) {
+	public boolean isFirstMove(Locations curr, BoardIndex[][] board) {
 		
-		if((this.whiteOrBlack == 0 && curr.charAt(1) == '2') || (this.whiteOrBlack == 1 && curr.charAt(1) == '7')){
+		if((this.whiteOrBlack == 0 && curr.getY() == 1) || (this.whiteOrBlack == 1 && curr.getY() == 6)){
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean tryMove(String curr, String next) { //This is complicated, need to do diagonal if trying to capture, otherwise get length to be 1 or 2
-		if(isValidLoc(curr,next)) {return true;}
+	public boolean tryMove(Locations curr, Locations next,BoardIndex[][] board) { //This is complicated, need to do diagonal if trying to capture, otherwise get length to be 1 or 2
+		if(isValidLoc(curr,next,board)) {return true;}
 		
 		return false;
 	}
