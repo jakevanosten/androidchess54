@@ -1,7 +1,7 @@
-package gamePiece;
+package com.example.jake.gamePiece;
 
-import boardData.BoardIndex;
-import boardData.Locations;
+import com.example.jake.boardData.*;
+
 
 public class Queen extends GamePiece{
 

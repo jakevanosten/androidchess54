@@ -1,4 +1,4 @@
-package boardData;
+package com.example.jake.boardData;
 
 public class Locations {
     private int x,y;

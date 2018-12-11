@@ -1,6 +1,6 @@
-package boardData;
+package com.example.jake.boardData;
 
-import gamePiece.GamePiece;
+import com.example.jake.gamePiece.GamePiece;
 
 public class BoardIndex {
     private GamePiece gp;
