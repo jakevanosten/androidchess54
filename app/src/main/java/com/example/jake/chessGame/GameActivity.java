@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jake.boardData.BoardIndex;
@@ -66,6 +67,8 @@ public class GameActivity extends AppCompatActivity {
     public BoardIndex[][] undoBoard = new BoardIndex[8][8];
     public TextView go;
     public TextView gameLog;
+    public TextView pawnUp;
+    public LinearLayout pawn_choices;
     String lastTurnLog = "White: Choose Piece";
     boolean firstClickFlag = true;
     Locations lastClick = new Locations(0,0);
@@ -82,10 +85,21 @@ public class GameActivity extends AppCompatActivity {
         initInternalBoard();
         initDisplay();
         go = findViewById(R.id.game_over);
+        pawnUp = findViewById(R.id.pawnUp);
+        pawn_choices = findViewById(R.id.pawn_choices);
         gameLog = findViewById(R.id.gameLog);
     }
 
     public void move(View v) {
+
+        if(Pawn.promotionFlag == 1) {//still need to upgrade before move
+            if(whiteTurn){
+                gameLog.setText("Black: Upgrade Pawn First");
+            }else{
+                gameLog.setText("White: Upgrade Pawn First");
+            }
+            return;
+        }
 
         String t = v.getTag().toString();
         char c = t.charAt(0);
@@ -139,7 +153,13 @@ public class GameActivity extends AppCompatActivity {
 
                     saveBoard();
 
-                    if(King.castlingFlag == 1){ //do the castle
+                    if (Pawn.promotionFlag ==1){
+                        pawnUp.setVisibility(View.VISIBLE);
+                        pawn_choices.setVisibility(View.VISIBLE);
+                        lastClick.setX(col);
+                        lastClick.setY(row);
+                        return;
+                    }else if(King.castlingFlag == 1){ //do the castle
                         if(whiteTurn && firstClick.getX()<col) {//rook at 77 going to 57
 
                             internalBoard[6][7].setPiece(curr); //king move
@@ -189,7 +209,6 @@ public class GameActivity extends AppCompatActivity {
                         gameLog.setText("Black: Choose Piece");
                     }
                     checkForCheck();
-                    checkUpgrade();
                 }else{ //move not valid, do nothing
                     firstClickFlag = true;
                     if(whiteTurn){
@@ -227,16 +246,15 @@ public class GameActivity extends AppCompatActivity {
 
                         saveBoard();
 
-                        internalBoard[col][row].setPiece(curr);
-                        internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
-                        chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
-
                         if (internalBoard[col][row].getPiece() instanceof King) {
                             go.setVisibility(View.VISIBLE);
                             gameLog.setText("Recording Saved.");
                             //save recording
-                            System.exit(0);
                         }
+
+                        internalBoard[col][row].setPiece(curr);
+                        internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                        chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
 
                         firstClickFlag = true;
                         whiteTurn = !(whiteTurn);
@@ -247,7 +265,6 @@ public class GameActivity extends AppCompatActivity {
                             gameLog.setText("Black: Choose Piece");
                         }
                         checkForCheck();
-                        checkUpgrade();
                     }else{ //move not valid
                         firstClickFlag = true;
                         if(whiteTurn){
@@ -270,9 +287,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void saveBoard() {
-    }
-
-    private void checkUpgrade() {
     }
 
 
@@ -459,7 +473,46 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void upgradePiece(View v){
+        String t = v.getTag().toString();
+        Pawn upper = (Pawn) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();
+        int wob = upper.getColor();
+        switch (t) {
+            case "pq":
+                internalBoard[lastClick.getX()][lastClick.getY()].setPiece(new Queen(wob));
+                internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                break;
+            case "pb":
+                internalBoard[lastClick.getX()][lastClick.getY()].setPiece(new Bishop(wob));
+                internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                break;
+            case "pr":
+                internalBoard[lastClick.getX()][lastClick.getY()].setPiece(new Rook(wob));
+                internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                break;
+            case "pk":
+                internalBoard[lastClick.getX()][lastClick.getY()].setPiece(new Knight(wob));
+                internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                break;
+        }
 
+        loadPieces();
+        pawnUp.setVisibility(View.INVISIBLE);
+        pawn_choices.setVisibility(View.INVISIBLE);
+
+        if(!whiteTurn){
+            gameLog.setText("White: Choose Piece");
+        }else{
+            gameLog.setText("Black: Choose Piece");
+        }
+        Pawn.promotionFlag = 0;
+        firstClickFlag = true;
+        whiteTurn = !(whiteTurn);
+        lastTurnLog = gameLog.getText().toString();
+        checkForCheck();
     }
 
     public void checkForCheck(){

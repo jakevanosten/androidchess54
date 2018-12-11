@@ -8,7 +8,7 @@
     tools:context=".GameActivity">
 
     <Button
-        android:id="@+id/undo_button2"
+        android:id="@+id/ai_butt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -1060,7 +1060,7 @@
         android:text="@string/undo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/pawnUp"
         android:layout_width="66dp"
         android:layout_height="54dp"
         android:layout_alignParentStart="true"
@@ -1093,6 +1093,7 @@
             android:foreground="@drawable/bqueen"
             android:onClick="upgradePiece"
             android:padding="5sp"
+            android:tag="pq"
             android:textAlignment="center"
             android:textSize="12sp" />
 
@@ -1105,6 +1106,7 @@
             android:foreground="@drawable/bbishop"
             android:onClick="upgradePiece"
             android:padding="5sp"
+            android:tag="pb"
             android:textAlignment="center"
             android:textSize="12sp" />
 
@@ -1117,6 +1119,7 @@
             android:foreground="@drawable/brook"
             android:onClick="upgradePiece"
             android:padding="5sp"
+            android:tag="pr"
             android:textAlignment="center"
             android:textSize="12sp" />
 
@@ -1129,6 +1132,7 @@
             android:foreground="@drawable/bknight"
             android:onClick="upgradePiece"
             android:padding="5sp"
+            android:tag="pk"
             android:textAlignment="center"
             android:textSize="12sp" />
 
@@ -1152,7 +1156,7 @@
         android:id="@+id/gameLog"
         android:layout_width="188dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/textView2"
+        android:layout_alignStart="@+id/pawnUp"
         android:layout_alignParentTop="true"
         android:paddingStart="3dp"
         android:paddingTop="10dp"
