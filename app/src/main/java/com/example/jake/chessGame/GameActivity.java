@@ -130,9 +130,6 @@ public class GameActivity extends AppCompatActivity {
                 else if (curr instanceof King){ ki = (King) curr;}
                 else{ pa = (Pawn) curr;}
 
-                String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
-                System.out.println(result);
-
                 if(((rk!=null) ?
                         rk : ((kn!=null) ?
                         kn : ((bi!=null) ?
@@ -142,9 +139,46 @@ public class GameActivity extends AppCompatActivity {
 
                     saveBoard();
 
-                    internalBoard[col][row].setPiece(curr);
-                    internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
-                    chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                    if(King.castlingFlag == 1){ //do the castle
+                        if(whiteTurn && firstClick.getX()<col) {//rook at 77 going to 57
+
+                            internalBoard[6][7].setPiece(curr); //king move
+                            internalBoard[5][7].setPiece(internalBoard[7][7].getPiece()); //rook move
+                            internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null); //old king delete
+                            internalBoard[7][7].setPiece(null);
+                            chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                            chessBoard[7][7].setBackgroundResource(0);
+                        }else if(whiteTurn && firstClick.getX() > col) { //rook at 07 going to 37
+
+                            internalBoard[2][7].setPiece(curr); //king move
+                            internalBoard[3][7].setPiece(internalBoard[0][7].getPiece()); //rook move
+                            internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null); //old king delete
+                            internalBoard[0][7].setPiece(null);
+                            chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                            chessBoard[0][7].setBackgroundResource(0);
+                        }else if(!(whiteTurn) && firstClick.getX()<col) {//rook at 70 going to 50
+
+                            internalBoard[6][0].setPiece(curr); //king move
+                            internalBoard[5][0].setPiece(internalBoard[7][0].getPiece()); //rook move
+                            internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null); //old king delete
+                            internalBoard[7][0].setPiece(null);
+                            chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                            chessBoard[7][0].setBackgroundResource(0);
+                        }else if(!(whiteTurn) && firstClick.getX() > col) { //rook at 00 going to d8
+
+                            internalBoard[2][0].setPiece(curr); //king move
+                            internalBoard[3][0].setPiece(internalBoard[0][0].getPiece()); //rook move
+                            internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null); //old king delete
+                            internalBoard[0][0].setPiece(null);
+                            chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                            chessBoard[0][0].setBackgroundResource(0);
+                        }
+                        King.castlingFlag = 0;
+                    }else {
+                        internalBoard[col][row].setPiece(curr);
+                        internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                        chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+                    }
 
                     firstClickFlag = true;
                     whiteTurn = !(whiteTurn);
@@ -183,9 +217,6 @@ public class GameActivity extends AppCompatActivity {
                     else if (curr instanceof Queen){ qu = (Queen) curr;}
                     else if (curr instanceof King){ ki = (King) curr;}
                     else{ pa = (Pawn) curr;}
-
-                    String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
-                    System.out.println(result);
 
                     if(((rk!=null) ?
                             rk : ((kn!=null) ?
