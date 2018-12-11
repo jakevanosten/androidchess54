@@ -1072,6 +1072,31 @@
         android:textColor="@color/cardview_light_background"
         android:visibility="invisible" />
 
+    <Button
+        android:id="@+id/resign"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="3dp"
+        android:layout_weight="1"
+        android:onClick="resignGame"
+        android:text="RESIGN"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/draw"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@+id/pawnUp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-68dp"
+        android:layout_weight="1"
+        android:onClick="drawGame"
+        android:text="DRAW"
+        android:textSize="10sp" />
+
     <LinearLayout
         android:id="@+id/pawn_choices"
         android:layout_width="333dp"
@@ -1143,8 +1168,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-275dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="-193dp"
+        android:layout_marginBottom="1dp"
         android:layout_toEndOf="@+id/pawn_choices"
         android:fontFamily="serif"
         android:text="@string/g_o"

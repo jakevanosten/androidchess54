@@ -12,7 +12,6 @@ import com.example.jake.boardData.BoardIndex;
 import com.example.jake.boardData.Locations;
 import com.example.jake.gamePiece.*;
 
-
 public class GameActivity extends AppCompatActivity {
 
     //Declare and initialize knight pieces; going to disregard the string parameter
@@ -517,5 +516,18 @@ public class GameActivity extends AppCompatActivity {
 
     public void checkForCheck(){
 
+    }
+
+    public void drawGame(View v){
+
+    }
+
+    public void resignGame(View v){
+        if(whiteTurn){
+            gameLog.setText("Resign: Black wins!");
+        }else{
+            gameLog.setText("Resign: White wins!");
+        }
+        go.setVisibility(View.VISIBLE);
     }
 }
