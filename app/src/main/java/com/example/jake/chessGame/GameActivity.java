@@ -8,6 +8,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.example.jake.boardData.BoardIndex;
+import com.example.jake.boardData.Locations;
 import com.example.jake.gamePiece.*;
 
 
@@ -63,7 +64,9 @@ public class GameActivity extends AppCompatActivity {
     public TextView[][] chessBoard = new TextView[8][8];
     public BoardIndex[][] internalBoard = new BoardIndex[8][8];
     public BoardIndex[][] undoBoard = new BoardIndex[8][8];
-
+    boolean whiteTurn = true;
+    public TextView go;
+    Locations click = new Locations(0,0);
     boolean firstClickFlag = true;
     GridLayout grid;
 
@@ -74,10 +77,22 @@ public class GameActivity extends AppCompatActivity {
 
         initInternalBoard();
         initDisplay();
+        go = findViewById(R.id.game_over);
     }
 
     public void move(View v) {
 
+        String t = v.getTag().toString();
+        char r = t.charAt(0);
+        char c = t.charAt(1);
+        int row = r - '0';
+        int col = c - '0';
+        click.setX(col);
+        click.setY(row);
+
+        if(firstClickFlag){
+
+        }
 
     }
 

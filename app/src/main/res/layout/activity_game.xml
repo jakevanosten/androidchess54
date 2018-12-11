@@ -35,19 +35,22 @@
             android:id="@+id/ind00"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="00" />
 
         <TextView
             android:id="@+id/ind10"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardLight" />
+            android:background="@color/boardLight"
+            android:tag="10" />
 
         <TextView
             android:id="@+id/ind20"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/boardDark" />
+            android:background="@color/boardDark"
+            android:tag="20" />
 
         <TextView
             android:id="@+id/ind30"
@@ -437,7 +440,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@null"
-            android:onClick="move" />
+            android:onClick="move"
+            android:tag="00" />
 
         <TextView
             android:id="@+id/bk1"
