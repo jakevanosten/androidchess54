@@ -34,13 +34,33 @@ public class GamePiece{
 	 */
 	
 	public boolean isOneSpace(Locations curr, Locations next,BoardIndex[][] board) {
+		int currRow = curr.getY();
+		int currCol = curr.getX();
+		int nextRow = next.getY();
+		int nextCol = next.getX();
+
+		if (nextCol-currCol==1 && nextRow-currRow==1) { //bottom right
+			return true;
+		}else if (nextCol-currCol==1 && currRow-nextRow==1) { //top right
+			return true;
+		}else if (nextCol-currCol==1 && currRow==nextRow) { //directly right
+			return true;
+		}else if (currCol-nextCol==1 && currRow-nextRow==1) { //top left
+			return true;
+		}else if (nextCol==currCol && currRow-nextRow==1) { //directly up
+			return true;
+		}else if (currCol-nextCol==1 && currRow==nextRow) { //directly left
+			return true;
+		}if (currCol-nextCol==1 && nextRow-currRow==1) { //bottom left
+			return true;
+		}else if (nextCol==currCol && nextRow-currRow==1) { //directly down
+			return true;
+		}
+
 		return false;
 	}
 	
 	public boolean isValidLoc(Locations curr, Locations next, BoardIndex[][] board) {
-		if(board[curr.getX()][curr.getY()].getPiece() == null){
-			return false;
-		}
 
 		GamePiece curCell = board[curr.getX()][curr.getY()].getPiece();
 
@@ -71,28 +91,28 @@ public class GamePiece{
 		 */
 		if(currCol == nextCol && currRow != nextRow && currRow < nextRow) { //check each row on path - moving down the board
 			for(int i=currRow+1;i<=nextRow;i++) {
-				if(board[i][currCol].getPiece() != null) { //piece in the way
+				if(board[currCol][i].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol == nextCol && currRow != nextRow && currRow > nextRow) { //moving up
 			for(int i=currRow-1;i>=nextRow;i--) {
-				if(board[i][currCol].getPiece() != null) { //piece in the way
+				if(board[currCol][i].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol < nextCol) { //moving right
 			for(int i=currCol+1;i<=nextCol;i++) {
-				if(board[currRow][i].getPiece() != null) { //piece in the way
+				if(board[i][currRow].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
 			return true;
 		}else if (currCol != nextCol && currRow == nextRow && currCol > nextCol) { //moving left
 			for(int i=currCol-1;i>=nextCol;i--) {
-				if(board[currRow][i].getPiece() != null) { //piece in the way
+				if(board[i][currRow].getPiece() != null) { //piece in the way
 					return false;
 				}
 			}
@@ -102,7 +122,7 @@ public class GamePiece{
 			if(nextCol>currCol && nextRow>currRow) {//down and right
 				k = currRow+1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(board[k][i].getPiece() != null) { //piece in the way
+					if(board[i][k].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k++;
@@ -111,7 +131,7 @@ public class GamePiece{
 			}else if(nextCol>currCol && nextRow<currRow) {//up and right
 				k = currRow-1;
 				for(int i=currCol+1;i<=nextCol;i++) {
-					if(board[k][i].getPiece() != null) { //piece in the way
+					if(board[i][k].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k--;
@@ -120,7 +140,7 @@ public class GamePiece{
 			}else if(nextCol<currCol && nextRow>currRow) {//down and left
 				k = currRow+1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(board[k][i].getPiece() != null) { //piece in the way
+					if(board[i][k].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k++;
@@ -129,7 +149,7 @@ public class GamePiece{
 			}else { //up and left
 				k = currRow-1;
 				for(int i=currCol-1;i>=nextCol;i--) {
-					if(board[k][i].getPiece() != null) { //piece in the way
+					if(board[i][k].getPiece() != null) { //piece in the way
 						return false;
 					}
 					k--;
@@ -170,7 +190,7 @@ public class GamePiece{
 		int nextRow = next.getY();
 		int nextCol = next.getX();
 		
-		if (currCol != nextCol && currRow == nextRow) {
+		if ((currCol != nextCol) && (currRow == nextRow)) {
 			return true;
 		}
 		return false;
@@ -181,8 +201,8 @@ public class GamePiece{
 		int currCol = curr.getX();
 		int nextRow = next.getY();
 		int nextCol = next.getX();
-		
-		if (nextCol-currCol==nextRow-currRow){
+
+		if (nextCol-currCol==nextRow-currRow || nextCol-currCol==currRow-nextRow){
 			return true;
 		}
 		return false;

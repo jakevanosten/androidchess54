@@ -86,21 +86,20 @@ public class GameActivity extends AppCompatActivity {
     public void move(View v) {
 
         String t = v.getTag().toString();
-        char c = t.charAt(0);
-        char r = t.charAt(1);
-        int col = c - '0';
+        char r = t.charAt(0);
+        char c = t.charAt(1);
         int row = r - '0';
+        int col = c - '0';
 
         if(firstClickFlag){
-            if(internalBoard[row][col].getPiece() == null){
+            if(internalBoard[col][row].getPiece() == null){
                 return;
-            }else if((internalBoard[row][col].getPiece().getColor() == 0) && !(whiteTurn)){//clicked on wrong team
+            }else if((internalBoard[col][row].getPiece().getColor() == 0) && !(whiteTurn)){//clicked on wrong team
                 return;
             }else{
-                System.out.println(row + "," + col);
                 firstClickFlag = false;
-                firstClick.setX(row);
-                firstClick.setY(col);
+                firstClick.setX(col);
+                firstClick.setY(row);
                 if(whiteTurn){
                     gameLog.setText("White: Choose Destination");
                 }else{
@@ -111,8 +110,8 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }else{
-            if(internalBoard[row][col].getPiece() == null){ //empty space
-                System.out.println(row + "," + col);
+            if(internalBoard[col][row].getPiece() == null){ //empty space
+
                 Rook rk = null;
                 Knight kn = null;
                 Bishop bi = null;
@@ -120,26 +119,24 @@ public class GameActivity extends AppCompatActivity {
                 King ki = null;
                 Pawn pa = null;
 
-                if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                else{ pa = (Pawn) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                else{ pa = (Pawn) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
 
-                //String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
-                //System.out.println(result);
+                String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
+                System.out.println(result);
 
-                if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(row,col),internalBoard)) { //valid move
+                if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
 
-
-                    System.out.println(row + "," + col);
                     saveBoard();
-                    Locations newLoc = new Locations(row, col);
+                    Locations newLoc = new Locations(col, row);
 
                     internalBoard[row][col].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
                     internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
-
+                    chessBoard[newLoc.getX()][newLoc.getY()].setBackgroundResource(0);
 
                     firstClickFlag = true;
                     whiteTurn = !(whiteTurn);
@@ -154,8 +151,7 @@ public class GameActivity extends AppCompatActivity {
                     return;
                 }
             }else{//piece in space
-                if((internalBoard[row][col].getPiece().getColor() == 0) == (whiteTurn)){ //diff team
-                    System.out.println(row + "," + col);
+                if((internalBoard[col][row].getPiece().getColor() == 0) == (whiteTurn)){ //diff team
 
                     Rook rk = null;
                     Knight kn = null;
@@ -164,26 +160,26 @@ public class GameActivity extends AppCompatActivity {
                     King ki = null;
                     Pawn pa = null;
 
-                    if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                    else if (internalBoard[firstClick.getY()][firstClick.getX()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
-                    else{ pa = (Pawn) internalBoard[firstClick.getY()][firstClick.getX()].getPiece();}
+                    if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Rook){ rk = (Rook) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Knight){ kn = (Knight) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Bishop){ bi = (Bishop) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof Queen){ qu = (Queen) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                    else if (internalBoard[firstClick.getX()][firstClick.getY()].getPiece() instanceof King){ ki = (King) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
+                    else{ pa = (Pawn) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();}
 
                     //String result = (rk!=null) ? "Rook" : ((kn!=null) ? "Knight" : ((bi!=null) ? "Bishop" : ((qu!=null) ? "Queen" : ((ki!=null) ? "King" : "Pawn"))));
                     //System.out.println(result);
 
-                    if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(row,col),internalBoard)) { //valid move
+                    if(((rk!=null) ? rk : ((kn!=null) ? kn : ((bi!=null) ? bi : ((qu!=null) ? qu : ((ki!=null) ? ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
 
-                        System.out.println(row + "," + col);
                         saveBoard();
-                        Locations newLoc = new Locations(row, col);
+                        Locations newLoc = new Locations(col, row);
 
-                        internalBoard[row][col].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
+                        internalBoard[col][row].setPiece(internalBoard[firstClick.getX()][firstClick.getY()].getPiece());
                         internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
+                        chessBoard[newLoc.getX()][newLoc.getY()].setBackgroundResource(0);
 
-                        if (internalBoard[row][col].getPiece() instanceof King) {
+                        if (internalBoard[col][row].getPiece() instanceof King) {
                             go.setVisibility(View.VISIBLE);
                             gameLog.setText("Recording Saved.");
                             //save recording
@@ -209,8 +205,8 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         checkForCheck();
-        lastClick.setX(row);
-        lastClick.setY(col);
+        lastClick.setX(col);
+        lastClick.setY(row);
         loadPieces();
     }
 
@@ -242,8 +238,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void loadPieces() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 8; i++) {
                 int x;
                 int color;
 
@@ -304,8 +300,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void initInternalBoard(){
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 8; i++) {
                 internalBoard[i][j] = new BoardIndex(null);
                 undoBoard[i][j] = new BoardIndex(null);
             }
