@@ -62,17 +62,17 @@ public class GameActivity extends AppCompatActivity {
     //declare and initialize textview object for display board and internal representation for board
     public TextView[][] chessBoard = new TextView[8][8];
     public BoardIndex[][] internalBoard = new BoardIndex[8][8];
-    boolean firstClickFlag = true;
+    public BoardIndex[][] undoBoard = new BoardIndex[8][8];
 
+    boolean firstClickFlag = true;
+    GridLayout grid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        GridLayout gridLayout = findViewById(R.id.pieceSpots);
-
         initInternalBoard();
-        //initDisplay();
+        initDisplay();
     }
 
     public void move(View v){
@@ -80,23 +80,88 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    /*
+
     public void initDisplay(){
 
+        grid = findViewById(R.id.pieceSpots);
         int i,j;
 
         for(i = 0; i < 8; i++){
             for(j = 0; j < 8; j++){
-                //chessBoard[i][j] = (TextView)
+                chessBoard[i][j] = (TextView) findViewById(grid.getChildAt(i).getId());
+                if(internalBoard[i][j].getPiece() == null){
+                    undoBoard[i][j] = null;
+                }else{
+                    undoBoard[i][j].setPiece(internalBoard[i][j].getPiece());
+                }
             }
         }
 
+        loadPieces();
     }
 
-    */
+    public void loadPieces(){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+
+                if(internalBoard[i][j].getPiece() == null){
+                    chessBoard[i][j].setBackgroundResource(0);
+                }else {
+                    GamePiece gp = internalBoard[i][j].getPiece();
+
+                    if (gp instanceof Pawn) {
+                        if (gp.getColor() == 0) {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.wpawn);
+                        } else {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.bpawn);
+                        }
+                    } else if (gp instanceof Rook) {
+                        if (gp.getColor() == 0) {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.wrook);
+                        } else {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.brook);
+                        }
+                    } else if (gp instanceof Knight) {
+                        if (gp.getColor() == 0) {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.wknight);
+                        } else {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.bknight);
+                        }
+                    } else if (gp instanceof Bishop) {
+                        if (gp.getColor() == 0) {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.wbishop);
+                        } else {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.bbishop);
+                        }
+                    } else if (gp instanceof Queen) {
+                        if (gp.getColor() == 0) {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.wqueen);
+                        } else {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.bqueen);
+                        }
+                    } else if (gp instanceof King) {
+                        if (gp.getColor() == 0) {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.wking);
+                        } else {
+                            chessBoard[i][j].setBackgroundResource(R.drawable.bking);
+                        }
+                    }
+                }
+            }
+        }
+        checkForCheck();
+    }
+
+
 
     private void initInternalBoard(){
 
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                internalBoard[i][j] = new BoardIndex(null);
+                undoBoard[i][j] = new BoardIndex(null);
+            }
+        }
         //set black special pieces
         internalBoard[0][0].setPiece(bR1);
         internalBoard[1][0].setPiece(bN1);
@@ -188,6 +253,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void upgradePiece(View v){
+
+    }
+
+    public void checkForCheck(){
 
     }
 }
