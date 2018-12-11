@@ -3,7 +3,7 @@ package com.example.jake.boardData;
 import com.example.jake.gamePiece.GamePiece;
 
 public class BoardIndex {
-    private GamePiece gp;
+    public GamePiece gp;
 
     public BoardIndex(GamePiece gp){
         this.gp = gp;

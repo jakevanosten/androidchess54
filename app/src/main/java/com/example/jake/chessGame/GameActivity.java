@@ -16,11 +16,11 @@ public class GameActivity extends AppCompatActivity {
     //Declare and initialize knight pieces; going to disregard the string parameter
     Knight bN1 = new Knight(1);
     Knight bN2 = new Knight(1);
-    Knight wN1 = new Knight( 0);
-    Knight wN2 = new Knight( 0);
+    Knight wN1 = new Knight(0);
+    Knight wN2 = new Knight(0);
 
     //Declare and initialize rook pieces; going to disregard the string parameter
-    Rook bR1 = new Rook( 1);
+    Rook bR1 = new Rook(1);
     Rook bR2 = new Rook(1);
     Rook wR1 = new Rook(0);
     Rook wR2 = new Rook(0);
@@ -28,8 +28,8 @@ public class GameActivity extends AppCompatActivity {
     //Declare and initialize bishop pieces; going to disregard the string parameter
     Bishop bB1 = new Bishop(1);
     Bishop bB2 = new Bishop(1);
-    Bishop wB1 = new Bishop( 0);
-    Bishop wB2 = new Bishop( 0);
+    Bishop wB1 = new Bishop(0);
+    Bishop wB2 = new Bishop(0);
 
 
     //Declare and initialize Queen Pieces
@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
     Queen wQ = new Queen(0);
 
     //Declare and initialize King Pieces
-    King bK = new King( 1);
+    King bK = new King(1);
     King wK = new King(0);
 
     //Declare and initialize pawn Pieces
@@ -66,6 +66,7 @@ public class GameActivity extends AppCompatActivity {
 
     boolean firstClickFlag = true;
     GridLayout grid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,80 +76,94 @@ public class GameActivity extends AppCompatActivity {
         initDisplay();
     }
 
-    public void move(View v){
+    public void move(View v) {
 
 
     }
 
 
-    public void initDisplay(){
+    public void initDisplay() {
 
         grid = findViewById(R.id.pieceSpots);
-        int i,j;
-
-        for(i = 0; i < 8; i++){
-            for(j = 0; j < 8; j++){
-                chessBoard[i][j] = (TextView) findViewById(grid.getChildAt(i).getId());
-                if(internalBoard[i][j].getPiece() == null){
+        int i, j;
+        int k = 0;
+        for (j = 0; j < 8; j++) {
+            for (i = 0; i < 8; i++) {
+                chessBoard[i][j] = (TextView) findViewById(grid.getChildAt(k).getId());
+                if (internalBoard[i][j].getPiece() == null) {
                     undoBoard[i][j] = null;
-                }else{
+                } else {
                     undoBoard[i][j].setPiece(internalBoard[i][j].getPiece());
                 }
+                k++;
             }
         }
 
         loadPieces();
     }
 
-    public void loadPieces(){
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                    GamePiece gp = internalBoard[i][j].getPiece();
-                    if (gp instanceof Pawn) {
-                        if (gp.getColor() == 0) {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.wpawn);
-                        } else {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.bpawn);
-                        }
-                    } else if (gp instanceof Rook) {
-                        if (gp.getColor() == 0) {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.wrook);
-                        } else {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.brook);
-                        }
-                    } else if (gp instanceof Knight) {
-                        if (gp.getColor() == 0) {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.wknight);
-                        } else {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.bknight);
-                        }
-                    } else if (gp instanceof Bishop) {
-                        if (gp.getColor() == 0) {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.wbishop);
-                        } else {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.bbishop);
-                        }
-                    } else if (gp instanceof Queen) {
-                        if (gp.getColor() == 0) {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.wqueen);
-                        } else {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.bqueen);
-                        }
-                    } else if (gp instanceof King) {
-                        if (gp.getColor() == 0) {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.wking);
-                        } else {
-                            chessBoard[i][j].setBackgroundResource(R.drawable.bking);
-                        }
+    public void loadPieces() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int x;
+                int color;
+
+                if (internalBoard[i][j].getPiece() instanceof Pawn) {
+                    color = internalBoard[i][j].getPiece().getColor();
+                    if (color == 0) {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.wpawn);
+                    } else {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.bpawn);
+                    }
+                } else if (internalBoard[i][j].getPiece() instanceof Rook) {
+                    color = internalBoard[i][j].getPiece().getColor();
+
+                    if (color == 0) {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.wrook);
+                    } else {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.brook);
+                    }
+                } else if (internalBoard[i][j].getPiece() instanceof Knight) {
+                    color = internalBoard[i][j].getPiece().getColor();
+
+                    if (color == 0) {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.wknight);
+                    } else {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.bknight);
+                    }
+                } else if (internalBoard[i][j].getPiece() instanceof Bishop) {
+                    color = internalBoard[i][j].getPiece().getColor();
+
+                    if (color == 0) {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.wbishop);
+                    } else {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.bbishop);
+                    }
+                } else if (internalBoard[i][j].getPiece() instanceof Queen) {
+                    color = internalBoard[i][j].getPiece().getColor();
+
+                    if (color == 0) {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.wqueen);
+                    } else {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.bqueen);
+                    }
+                } else if (internalBoard[i][j].getPiece() instanceof King) {
+                    color = internalBoard[i][j].getPiece().getColor();
+
+                    if (color == 0) {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.wking);
+                    } else {
+                        chessBoard[i][j].setBackgroundResource(R.drawable.bking);
                     }
                 }
+            }
         }
         checkForCheck();
     }
 
 
 
-    private void initInternalBoard(){
+    public void initInternalBoard(){
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -184,6 +199,8 @@ public class GameActivity extends AppCompatActivity {
         internalBoard[4][6].setPiece(wp5);
         internalBoard[5][6].setPiece(wp6);
         internalBoard[6][6].setPiece(wp7);
+        internalBoard[7][6].setPiece(wp8);
+
 
         //set white pieces
         internalBoard[0][7].setPiece(wR1);
@@ -197,7 +214,7 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-        printInternalBoard(internalBoard);
+       // printInternalBoard(internalBoard);
 
     }
 

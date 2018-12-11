@@ -12,7 +12,7 @@ public class GamePiece{
 	}
 	
 	public int getColor() {
-		return whiteOrBlack;
+		return this.whiteOrBlack;
 	}
 	
 	public boolean tryMove(Locations curr, Locations next, BoardIndex[][] board) {return false;}; //going to be overridden by each piece since they have different standards for moving
