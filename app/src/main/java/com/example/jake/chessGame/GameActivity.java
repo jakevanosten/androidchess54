@@ -1,18 +1,42 @@
 package com.example.jake.chessGame;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.content.Context;
 
 import com.example.jake.boardData.BoardIndex;
 import com.example.jake.boardData.Locations;
 import com.example.jake.gamePiece.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
 public class GameActivity extends AppCompatActivity {
+
+    //Delimiter used in CSV file
+    private static final String COMMA_DELIMITER = ",";
+    private static final String NEW_LINE_SEPARATOR = "\n";
+
+    //global counter to help name CSV files
+    int recordNum = 0;
+
 
     //Declare and initialize knight pieces; going to disregard the string parameter
     Knight bN1 = new Knight(1);
@@ -74,6 +98,9 @@ public class GameActivity extends AppCompatActivity {
     Locations firstClick = new Locations(0,0);
     boolean whiteTurn = true;
     GridLayout grid;
+    ArrayList<Locations> listOfMoves = new ArrayList<>();
+
+
 
 
     @Override
@@ -90,6 +117,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void move(View v) {
+
+        Locations src;
+        Locations dest;
 
         if(Pawn.promotionFlag == 1) {//still need to upgrade before move
             if(whiteTurn){
@@ -120,6 +150,13 @@ public class GameActivity extends AppCompatActivity {
                 }else{
                     gameLog.setText("Black: Choose Destination");
                 }
+
+                //Store first click move in listOfMoves Array list
+                src = new Locations(firstClick.getX(), firstClick.getY());
+                listOfMoves.add(src);
+
+
+
 
                 return;
             }
@@ -282,6 +319,14 @@ public class GameActivity extends AppCompatActivity {
         checkForCheck();
         lastClick.setX(col);
         lastClick.setY(row);
+
+        //Store second click into listOfMoves arraylist
+        dest = new Locations(lastClick.getX(), lastClick.getY());
+        listOfMoves.add(dest);
+
+
+
+
         loadPieces();
     }
 
@@ -523,11 +568,107 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void resignGame(View v){
+
+        //tiff: just testing to see if internal arraylist of moves is working
+        printListOfMoves(listOfMoves);
+        //think this would be a good spot to call method to write into file; probs will have the same setup in drawGame
+        writeListToCSV(listOfMoves);
+        //write the coordinate steps and then deal with freeing the arraylist for this game after recordX.txt is made
+
+
+        Button resignButton = (Button) findViewById(R.id.resign);
+
         if(whiteTurn){
             gameLog.setText("Resign: Black wins!");
         }else{
             gameLog.setText("Resign: White wins!");
         }
         go.setVisibility(View.VISIBLE);
+
+
+        //waits 5 seconds after "Game Over" message is visible before returning to main activity
+        new Handler().postDelayed(new Runnable(){
+
+            @Override
+            public void run(){
+
+                Intent backToMain = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(backToMain);
+
+            }
+        },5000);
+
+
+
+
     }
+
+
+    public void printListOfMoves(ArrayList<Locations> listOfMoves){
+
+        int listSize = listOfMoves.size();
+        for(int i = 0; i < listSize; i++){
+            int x = listOfMoves.get(i).getX();
+            int y = listOfMoves.get(i).getY();
+
+            System.out.println(x + "," + y);
+            System.out.println();
+
+        }
+
+    }
+
+    public void writeListToCSV(ArrayList<Locations> listOfMoves){
+
+        //FileWriter fileWriter = null;
+        Writer csvWriter = null;
+
+        try{
+
+
+            //String dirName = "/androidchess54/app/src/main/java/com/example/jake/recordedGames";
+            String dirName = "com.example.jake.recordedGames";
+
+            String filename = "record" + recordNum + ".csv";
+            System.out.println("filename is: " + filename);
+
+            File dir = new File (dirName);
+            //String filePath = getFilesDir().getPath().filename;
+            //File file = new File(filePath);
+
+
+            File actualFile = new File(dir, filename);
+
+            csvWriter = new BufferedWriter(new FileWriter(actualFile));
+            //csvWriter = new BufferedWriter(new FileWriter(file));
+
+            for(Locations location : listOfMoves){
+                csvWriter.append(String.valueOf(location.getX()));
+                csvWriter.append(String.valueOf(location.getY()));
+                csvWriter.append(NEW_LINE_SEPARATOR);
+            }
+
+            System.out.println("CSV file was create successfully!");
+
+
+        }catch(Exception e){
+            System.out.println("Error in CSVFileWriter!!");
+            e.printStackTrace();
+        }
+
+        /*finally {
+
+            try {
+                csvWriter.flush();
+                csvWriter.close();
+
+            } catch(IOException e){
+                System.out.println("Error while flushing/closing");
+            }
+
+
+        }*/
+
+    }
+
 }
