@@ -1,20 +1,16 @@
 package com.example.jake.chessGame;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.content.Context;
 
 import com.example.jake.boardData.BoardIndex;
 import com.example.jake.boardData.Locations;
@@ -25,8 +21,6 @@ import java.io.File;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -88,21 +82,20 @@ public class GameActivity extends AppCompatActivity {
     public TextView[][] chessBoard = new TextView[8][8];
     public BoardIndex[][] internalBoard = new BoardIndex[8][8];
     public BoardIndex[][] undoBoard = new BoardIndex[8][8];
-    public TextView go;
     public TextView gameLog;
+    public TextView checkLog;
     public TextView pawnUp;
     public LinearLayout pawn_choices;
     public Locations src;
     public Locations dest;
     boolean undoFlag = false;
     boolean firstClickFlag = true;
+    int playerInCheck = -1;
     Locations lastClick = new Locations(0,0);
     Locations firstClick = new Locations(0,0);
     boolean whiteTurn = true;
     GridLayout grid;
     ArrayList<Locations> listOfMoves = new ArrayList<>();
-
-
 
 
     @Override
@@ -112,10 +105,11 @@ public class GameActivity extends AppCompatActivity {
 
         initInternalBoard();
         initDisplay();
-        go = findViewById(R.id.game_over);
         pawnUp = findViewById(R.id.pawnUp);
         pawn_choices = findViewById(R.id.pawn_choices);
         gameLog = findViewById(R.id.gameLog);
+        checkLog = findViewById(R.id.checkLog);
+
     }
 
     public void undo(View v){
@@ -209,6 +203,7 @@ public class GameActivity extends AppCompatActivity {
                         pawn_choices.setVisibility(View.VISIBLE);
                         lastClick.setX(col);
                         lastClick.setY(row);
+                        checkForCheck();
                         return;
                     }else if(King.castlingFlag == 1){ //do the castle
                         undoFlag = true;
@@ -296,16 +291,18 @@ public class GameActivity extends AppCompatActivity {
                             qu : ((ki!=null) ?
                             ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
 
-                        if (internalBoard[col][row].getPiece() instanceof King) {
-                            go.setVisibility(View.VISIBLE);
-                            gameLog.setText("Recording Saved.");
-                            //save recording
-                        }
-
                         undoFlag = true;
                         internalBoard[col][row].setPiece(curr);
                         internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
                         chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
+
+                        if (internalBoard[col][row].getPiece() instanceof King) {
+                            gameLog.setText("Recording Saved.");
+                            checkLog.setVisibility(View.VISIBLE);
+                            checkLog.setText("Hey bitch");
+                            return;
+                            //save recording
+                        }
 
                         firstClickFlag = true;
                         whiteTurn = !(whiteTurn);
@@ -420,7 +417,6 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
-        checkForCheck();
     }
 
 
@@ -560,9 +556,60 @@ public class GameActivity extends AppCompatActivity {
         whiteTurn = !(whiteTurn);
         checkForCheck();
     }
+    public ArrayList<Locations> getPossibleMoves(Locations from){
+        int k =0;
+        int m =0;
+        Locations to;
+        ArrayList<Locations> possMoves = new ArrayList<>();
 
-    public void checkForCheck(){
+        for (k = 0; k < 8; k++) {
+            for (m = 0; m < 8; m++) {
+                to = new Locations(m,k);
+                if(internalBoard[m][k].getPiece() != null) {
+                    if (internalBoard[from.getX()][from.getY()].getPiece().tryMove(from, to, internalBoard)) {
+                        possMoves.add(to);
+                    }
+                }
+            }
+        }
+        return possMoves;
+    }
 
+    public boolean checkForCheck() {
+        ArrayList<Locations> pieceMoves = new ArrayList<>();
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 8; i++) {
+                pieceMoves.clear();
+
+                if (internalBoard[i][j].getPiece() != null) {
+                    pieceMoves = getPossibleMoves(new Locations(i, j));
+                    for (int n = 0; n <= pieceMoves.size() - 1; n++) {
+                        System.out.println(pieceMoves.get(n).getX() + "," + pieceMoves.get(n).getY());
+                        if (internalBoard[pieceMoves.get(n).getX()][pieceMoves.get(n).getY()].getPiece() instanceof King) {
+                            checkLog.setVisibility(View.VISIBLE);
+                            if(playerInCheck == 0){
+                                checkLog.setText("White King in Check!");
+                            }
+                            else if(playerInCheck == 1){
+                                checkLog.setText("Black King in Check!");
+                            }else {
+                                if (!whiteTurn) {
+                                    checkLog.setText("Black King in Check!");
+                                    playerInCheck = 1;
+                                } else {
+                                    checkLog.setText("White King in Check!");
+                                    playerInCheck = 0;
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        playerInCheck = -1;
+        checkLog.setVisibility(View.INVISIBLE);
+        return false;
     }
 
     public void drawGame(View v){
@@ -584,7 +631,6 @@ public class GameActivity extends AppCompatActivity {
         }else{
             gameLog.setText("Resign: White wins!");
         }
-        go.setVisibility(View.VISIBLE);
 
 
         //waits 5 seconds after "Game Over" message is visible before returning to main activity

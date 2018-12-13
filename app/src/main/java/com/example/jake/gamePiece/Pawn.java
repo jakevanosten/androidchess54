@@ -55,15 +55,16 @@ public class Pawn extends GamePiece{
 		boolean path = isPathClear(curr,next,board);
 		promotionFlag = 0;
 
-		if(isPromoting(curr,next,board)) {
-			promotionFlag = 1;
-		}
 
 		if(isFirstMove(curr) && val && path && ((isUp(curr,next,board) && this.getColor() == 0) || (isDown(curr,next,board) && this.getColor() == 1))) {//can move two spaces
 			int currRow = curr.getY();
 			int nextRow = next.getY();
 
-			if(isOneSpace(curr,next,board) && isDiag(curr,next,board) && oppInSpace(curr,next,board)) { return true; } //first move is a capture
+			if(isOneSpace(curr,next,board) && isDiag(curr,next,board) && oppInSpace(curr,next,board)) {
+				if(isPromoting(curr,next,board)) {
+					promotionFlag = 1;
+				}
+				return true; } //first move is a capture
 
 			if(((nextRow==currRow-2 || nextRow==currRow-1) && this.getColor() == 0) || ((nextRow==currRow+2 || nextRow==currRow+1) && this.getColor() == 1)) {
 				return true;

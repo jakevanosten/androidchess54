@@ -5,10 +5,9 @@
     <string name="recordText">Recorded Games</string>
     <string name="ai">AUTO MOVE</string>
     <string name="undo">UNDO</string>
-    <string name="g_o">GAME OVER</string>
     <string name="upgrade">Pawn Upgrade:</string>
-    <string name="wturn">White: Choose Piece</string>
-    <string name="bturn">Black: Choose Piece</string>
-    <string name="wturn2">White: Choose Destination</string>
-    <string name="bturn2">Black: Choose Destination</string>
+    <string name="draw">DRAW</string>
+    <string name="resign">RESIGN</string>
+    <string name="checkLog">No king is in check</string>
+    <string name="gameLog">White Moves First</string>
 </resources>

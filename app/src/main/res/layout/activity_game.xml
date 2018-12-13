@@ -1080,9 +1080,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="3dp"
-        android:layout_weight="1"
         android:onClick="resignGame"
-        android:text="RESIGN"
+        android:text="@string/resign"
         android:textSize="10sp" />
 
     <Button
@@ -1092,9 +1091,8 @@
         android:layout_below="@+id/pawnUp"
         android:layout_alignParentStart="true"
         android:layout_marginTop="-68dp"
-        android:layout_weight="1"
         android:onClick="drawGame"
-        android:text="DRAW"
+        android:text="@string/draw"
         android:textSize="10sp" />
 
     <LinearLayout
@@ -1164,17 +1162,17 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/game_over"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/checkLog"
+        android:layout_width="211dp"
+        android:layout_height="44dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-193dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="-229dp"
+        android:layout_marginBottom="13dp"
         android:layout_toEndOf="@+id/pawn_choices"
         android:fontFamily="serif"
-        android:text="@string/g_o"
+        android:text="@string/checkLog"
         android:textAlignment="center"
-        android:textSize="36sp"
+        android:textSize="18sp"
         android:visibility="invisible" />
 
     <TextView
@@ -1187,7 +1185,7 @@
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
-        android:text="@string/wturn"
+        android:text="@string/gameLog"
         android:textColor="@color/cardview_light_background"
         android:textSize="14sp" />
 
