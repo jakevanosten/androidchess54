@@ -1,42 +1,51 @@
 package com.example.jake.chessGame;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecordsActivity extends AppCompatActivity {
 
     private File root;
-    private ArrayList<File> recordFileList = new ArrayList<>();
+    public ArrayList<File> recordFileList = new ArrayList<>();
     private LinearLayout view;
+    //private List<String> recordNames;
+
+    public String[] recordNames;
 
 
     //From listview example
     private ListView recordListView;
     private ArrayAdapter<String> listAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
 
-        view = (LinearLayout) findViewById(R.id.RLView);
-        recordListView = (ListView) findViewById(R.id.recordList);
+        view = findViewById(R.id.RLView);
+        recordListView = findViewById(R.id.recordList);
 
 
-
-        //get the root path of directory
         root = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
-        recordFileList = getRecordFile(root);
+        getRecordFile(root);
 
         for(int i = 0; i < recordFileList.size(); i++){
             TextView textView = new TextView(this);
@@ -49,11 +58,26 @@ public class RecordsActivity extends AppCompatActivity {
             view.addView(textView);
         }
 
+        //TEST if the above fails
+        //listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordNames);
+        //recordListView.setAdapter(listAdapter);
 
-        //listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordFileList);
 
+        /*
+        recordNames = new ArrayList<String>();
+        String root_sd = Environment.getExternalStorageDirectory().toString();
+        root = new File(root_sd, "/external_sd");
 
-        //recordFileList.get(i).getName()
+        File list[] = root.listFiles();
+
+        for(int i = 0; i < list.length; i++){
+
+            recordNames.add(list[i].getName());
+        }
+
+        ArrayAdapter<String> setListAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordNames);
+        mkdirs
+        */
 
 
 
@@ -62,9 +86,11 @@ public class RecordsActivity extends AppCompatActivity {
 
     public ArrayList<File> getRecordFile(File root) {
 
-        ArrayList<File> tmpArr = new ArrayList<>();
+        //ArrayList<File> tmpArr = new ArrayList<>();
 
         File listFile[] =root.listFiles();
+
+
 
         if(listFile != null && listFile.length > 0){
 
@@ -72,8 +98,9 @@ public class RecordsActivity extends AppCompatActivity {
 
                 if(listFile[i].isFile()){
                     if(listFile[i].getName().endsWith(".txt")){
-                        tmpArr.add(listFile[i]);
+                        recordFileList.add(listFile[i]);
                         System.out.println("filename: " + listFile[i].getName());
+                        recordNames[i] = listFile[i].getName();
                     }
                 }
 
@@ -81,7 +108,7 @@ public class RecordsActivity extends AppCompatActivity {
 
 
         }
-        return tmpArr;
+        return recordFileList;
     }
 
 
@@ -95,6 +122,42 @@ public class RecordsActivity extends AppCompatActivity {
         return false;
 
     }
+
+/*
+    private String readFromFile(Context context){
+        String ret = "";
+
+        File path = context.getExternalFilesDir(null);
+        File dir = new File(path, "record0.txt");
+
+        try{
+
+                InputStream inputstream = context.openFileInput("record0.txt");
+
+                if(inputstream != null){
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputstream);
+
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                    String receiveString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while((receiveString = bufferedReader.readLine()) != null){
+
+                        stringBuilder.append(receiveString);
+                    }
+                    inputstream.close();
+                    ret = stringBuilder.toString();
+                }
+
+        }catch(Exception e){
+
+            Log.e("login activity", "can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+*/
 
 
 

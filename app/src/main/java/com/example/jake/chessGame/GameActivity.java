@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.os.Environment;
 
@@ -19,7 +20,12 @@ import com.example.jake.boardData.BoardIndex;
 import com.example.jake.boardData.Locations;
 import com.example.jake.gamePiece.*;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.io.FileWriter;
 
@@ -662,6 +668,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+
     public boolean isExternalStorageWritable(){
 
         String state = Environment.getExternalStorageState();
@@ -673,38 +680,42 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    public void writeRecordFileOnInternalStorage(Context context, ArrayList<Locations> listOfMoves){
+    public void writeRecordFileInExternalStorage(Context context, ArrayList<Locations> listOfMoves){
 
         boolean isWritable = isExternalStorageWritable();
 
         if(isWritable == true) {
 
+            File path = context.getExternalFilesDir(null);
             File file = new File(context.getFilesDir(), "RecordedGames");
 
             if (!file.exists()) {
-                file.mkdir();
+                file.mkdirs();
             }
 
-            try {
+            try{
+
                 String filename = "record" + recordNum + ".txt";
                 System.out.println("filename is: " + filename);
 
-                File tmp = new File(file, filename);
-                FileWriter recordWriter = new FileWriter(tmp);
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
 
-                for (Locations location : listOfMoves) {
-                    recordWriter.write(location.getX());
-                    recordWriter.write(location.getY());
-                    recordWriter.write(NEW_LINE_SEPARATOR);
+
+                for(Locations location : listOfMoves){
+                    outputStreamWriter.write(location.getX());
+                    outputStreamWriter.write(location.getY());
+                    outputStreamWriter.write(NEW_LINE_SEPARATOR);
                 }
-                recordNum++;
-                System.out.println("# records is now: " + recordNum);
-                recordWriter.flush();
-                recordWriter.close();
 
-            } catch (Exception e) {
-                System.out.println("Error in creating file");
-                e.printStackTrace();
+
+                outputStreamWriter.close();
+                System.out.println("Record File has successfully been created in External Storage!");
+
+                recordNum++;
+
+
+            }catch(IOException e){
+                Log.e("Exception", "file write failed!" + e.toString());
             }
 
         }else{
@@ -714,8 +725,43 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
+    /*
+    public void writeToFile(ArrayList<Locations> listOfMoves, Context context){
+        try{
+
+            String filename = "record" + recordNum + ".txt";
+            System.out.println("filename is: " + filename);
+
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
 
 
+            for(Locations location : listOfMoves){
+                outputStreamWriter.write(location.getX());
+                outputStreamWriter.write(location.getY());
+                outputStreamWriter.write(NEW_LINE_SEPARATOR);
+            }
+
+
+            outputStreamWriter.close();
+            System.out.println("Record File has successfully been created!");
+
+        }catch(IOException e){
+            Log.e("Exception", "file write failed!" + e.toString());
+        }
+    }
+
+
+
+
+    public void test(TextView tv){
+
+        String innermessage = "this is a message from records activity";
+
+        tv.setText(innermessage);
+
+    }
+
+    */
     public void gameOver(int winner){
 
         AlertDialog.Builder gameOverDialog = new AlertDialog.Builder(this);
@@ -739,7 +785,8 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    writeRecordFileOnInternalStorage(GameActivity.this, listOfMoves);
+                    writeRecordFileInExternalStorage(GameActivity.this, listOfMoves);
+                    //writeToFile(listOfMoves, GameActivity.this);
                     System.out.println("File successfull created!");
 
 
