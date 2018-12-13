@@ -92,7 +92,9 @@ public class GameActivity extends AppCompatActivity {
     public TextView gameLog;
     public TextView pawnUp;
     public LinearLayout pawn_choices;
-    String lastTurnLog = "White: Choose Piece";
+    public Locations src;
+    public Locations dest;
+    boolean undoFlag = false;
     boolean firstClickFlag = true;
     Locations lastClick = new Locations(0,0);
     Locations firstClick = new Locations(0,0);
@@ -116,10 +118,26 @@ public class GameActivity extends AppCompatActivity {
         gameLog = findViewById(R.id.gameLog);
     }
 
-    public void move(View v) {
+    public void undo(View v){
+        if(!undoFlag){
+            return;
+        }
+        if(!whiteTurn){
+            gameLog.setText("White: Choose Piece");
+        }else{
+            gameLog.setText("Black: Choose Piece");
+        }
+        internalBoard[firstClick.getX()][firstClick.getY()].setPiece(internalBoard[lastClick.getX()][lastClick.getY()].getPiece());
+        internalBoard[lastClick.getX()][lastClick.getY()].setPiece(null);
+        loadPieces();
+        chessBoard[lastClick.getX()][lastClick.getY()].setBackgroundResource(0);
+        listOfMoves.remove(firstClick); //clear last src
+        listOfMoves.remove(lastClick); //clear last dest
+        whiteTurn = !(whiteTurn);
+        undoFlag = false;
+    }
 
-        Locations src;
-        Locations dest;
+    public void move(View v) {
 
         if(Pawn.promotionFlag == 1) {//still need to upgrade before move
             if(whiteTurn){
@@ -129,7 +147,6 @@ public class GameActivity extends AppCompatActivity {
             }
             return;
         }
-
         String t = v.getTag().toString();
         char c = t.charAt(0);
         char r = t.charAt(1);
@@ -187,8 +204,6 @@ public class GameActivity extends AppCompatActivity {
                         qu : ((ki!=null) ?
                         ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //is a valid move
 
-                    saveBoard();
-
                     if (Pawn.promotionFlag ==1){
                         pawnUp.setVisibility(View.VISIBLE);
                         pawn_choices.setVisibility(View.VISIBLE);
@@ -196,6 +211,7 @@ public class GameActivity extends AppCompatActivity {
                         lastClick.setY(row);
                         return;
                     }else if(King.castlingFlag == 1){ //do the castle
+                        undoFlag = true;
                         if(whiteTurn && firstClick.getX()<col) {//rook at 77 going to 57
 
                             internalBoard[6][7].setPiece(curr); //king move
@@ -231,6 +247,7 @@ public class GameActivity extends AppCompatActivity {
                         }
                         King.castlingFlag = 0;
                     }else {
+                        undoFlag = true;
                         internalBoard[col][row].setPiece(curr);
                         internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
                         chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
@@ -238,7 +255,6 @@ public class GameActivity extends AppCompatActivity {
 
                     firstClickFlag = true;
                     whiteTurn = !(whiteTurn);
-                    lastTurnLog = gameLog.getText().toString();
                     if(whiteTurn){
                         gameLog.setText("White: Choose Piece");
                     }else{
@@ -280,21 +296,19 @@ public class GameActivity extends AppCompatActivity {
                             qu : ((ki!=null) ?
                             ki : pa))))).tryMove(firstClick,new Locations(col,row),internalBoard)) { //valid move
 
-                        saveBoard();
-
                         if (internalBoard[col][row].getPiece() instanceof King) {
                             go.setVisibility(View.VISIBLE);
                             gameLog.setText("Recording Saved.");
                             //save recording
                         }
 
+                        undoFlag = true;
                         internalBoard[col][row].setPiece(curr);
                         internalBoard[firstClick.getX()][firstClick.getY()].setPiece(null);
                         chessBoard[firstClick.getX()][firstClick.getY()].setBackgroundResource(0);
 
                         firstClickFlag = true;
                         whiteTurn = !(whiteTurn);
-                        lastTurnLog = gameLog.getText().toString();
                         if(whiteTurn){
                             gameLog.setText("White: Choose Piece");
                         }else{
@@ -330,10 +344,6 @@ public class GameActivity extends AppCompatActivity {
         loadPieces();
     }
 
-    private void saveBoard() {
-    }
-
-
     public void initDisplay() {
 
         grid = findViewById(R.id.pieceSpots);
@@ -343,7 +353,7 @@ public class GameActivity extends AppCompatActivity {
             for (i = 0; i < 8; i++) {
                 chessBoard[i][j] = (TextView) findViewById(grid.getChildAt(k).getId());
                 if (internalBoard[i][j].getPiece() == null) {
-                    undoBoard[i][j] = null;
+                    undoBoard[i][j] = new BoardIndex(null);
                 } else {
                     undoBoard[i][j].setPiece(internalBoard[i][j].getPiece());
                 }
@@ -464,8 +474,6 @@ public class GameActivity extends AppCompatActivity {
         internalBoard[6][7].setPiece(wN2);
         internalBoard[7][7].setPiece(wR2);
 
-
-
        // printInternalBoard(internalBoard);
 
     }
@@ -512,10 +520,6 @@ public class GameActivity extends AppCompatActivity {
 
    }
 
-    public void undo(View v){
-
-    }
-
     public void upgradePiece(View v){
         String t = v.getTag().toString();
         Pawn upper = (Pawn) internalBoard[firstClick.getX()][firstClick.getY()].getPiece();
@@ -546,7 +550,6 @@ public class GameActivity extends AppCompatActivity {
         loadPieces();
         pawnUp.setVisibility(View.INVISIBLE);
         pawn_choices.setVisibility(View.INVISIBLE);
-
         if(!whiteTurn){
             gameLog.setText("White: Choose Piece");
         }else{
@@ -555,7 +558,6 @@ public class GameActivity extends AppCompatActivity {
         Pawn.promotionFlag = 0;
         firstClickFlag = true;
         whiteTurn = !(whiteTurn);
-        lastTurnLog = gameLog.getText().toString();
         checkForCheck();
     }
 
@@ -577,7 +579,6 @@ public class GameActivity extends AppCompatActivity {
 
 
         Button resignButton = (Button) findViewById(R.id.resign);
-
         if(whiteTurn){
             gameLog.setText("Resign: Black wins!");
         }else{
