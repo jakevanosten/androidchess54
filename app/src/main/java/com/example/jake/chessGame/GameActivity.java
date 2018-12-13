@@ -1,26 +1,29 @@
 package com.example.jake.chessGame;
 
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.os.Environment;
+
 
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.content.Context;
 
 import com.example.jake.boardData.BoardIndex;
 import com.example.jake.boardData.Locations;
 import com.example.jake.gamePiece.*;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.io.FileWriter;
+
+import android.support.v7.app.AlertDialog;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -299,7 +302,7 @@ public class GameActivity extends AppCompatActivity {
                         if (internalBoard[col][row].getPiece() instanceof King) {
                             gameLog.setText("Recording Saved.");
                             checkLog.setVisibility(View.VISIBLE);
-                            checkLog.setText("Hey bitch");
+                            //checkLog.setText("Hey bitch");
                             return;
                             //save recording
                         }
@@ -334,8 +337,6 @@ public class GameActivity extends AppCompatActivity {
         //Store second click into listOfMoves arraylist
         dest = new Locations(lastClick.getX(), lastClick.getY());
         listOfMoves.add(dest);
-
-
 
 
         loadPieces();
@@ -618,37 +619,33 @@ public class GameActivity extends AppCompatActivity {
 
     public void resignGame(View v){
 
-        //tiff: just testing to see if internal arraylist of moves is working
-        printListOfMoves(listOfMoves);
-        //think this would be a good spot to call method to write into file; probs will have the same setup in drawGame
-        writeListToCSV(listOfMoves);
-        //write the coordinate steps and then deal with freeing the arraylist for this game after recordX.txt is made
-
 
         Button resignButton = (Button) findViewById(R.id.resign);
+
         if(whiteTurn){
             gameLog.setText("Resign: Black wins!");
+            gameOver(1);
         }else{
             gameLog.setText("Resign: White wins!");
+            gameOver(0);
         }
 
 
-        //waits 5 seconds after "Game Over" message is visible before returning to main activity
-        new Handler().postDelayed(new Runnable(){
 
-            @Override
-            public void run(){
+    //ASK JAKE WHERE CHECKMATE IS, just needs to call gameOver method to output the screen with results
 
-                Intent backToMain = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(backToMain);
-
-            }
-        },5000);
-
-
+        //tiff: just testing to see if internal arraylist of moves is working
+        //printListOfMoves(listOfMoves);
+        //think this would be a good spot to call method to write into file; probs will have the same setup in drawGame
+        //writeRecordFileOnInternalStorage(this, listOfMoves);
+        //write the coordinate steps and then deal with freeing the arraylist for this game after recordX.txt is made
 
 
     }
+
+
+
+
 
 
     public void printListOfMoves(ArrayList<Locations> listOfMoves){
@@ -665,56 +662,115 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void writeListToCSV(ArrayList<Locations> listOfMoves){
+    public boolean isExternalStorageWritable(){
 
-        //FileWriter fileWriter = null;
-        Writer csvWriter = null;
+        String state = Environment.getExternalStorageState();
 
-        try{
-
-
-            //String dirName = "/androidchess54/app/src/main/java/com/example/jake/recordedGames";
-            String dirName = "com.example.jake.recordedGames";
-
-            String filename = "record" + recordNum + ".csv";
-            System.out.println("filename is: " + filename);
-
-            File dir = new File (dirName);
-            //String filePath = getFilesDir().getPath().filename;
-            //File file = new File(filePath);
-
-
-            File actualFile = new File(dir, filename);
-
-            csvWriter = new BufferedWriter(new FileWriter(actualFile));
-            //csvWriter = new BufferedWriter(new FileWriter(file));
-
-            for(Locations location : listOfMoves){
-                csvWriter.append(String.valueOf(location.getX()));
-                csvWriter.append(String.valueOf(location.getY()));
-                csvWriter.append(NEW_LINE_SEPARATOR);
-            }
-
-            System.out.println("CSV file was create successfully!");
-
-
-        }catch(Exception e){
-            System.out.println("Error in CSVFileWriter!!");
-            e.printStackTrace();
+        if(Environment.MEDIA_MOUNTED.equals(state)){
+            return true;
         }
+        return false;
+    }
 
-        /*finally {
+
+    public void writeRecordFileOnInternalStorage(Context context, ArrayList<Locations> listOfMoves){
+
+        boolean isWritable = isExternalStorageWritable();
+
+        if(isWritable == true) {
+
+            File file = new File(context.getFilesDir(), "RecordedGames");
+
+            if (!file.exists()) {
+                file.mkdir();
+            }
 
             try {
-                csvWriter.flush();
-                csvWriter.close();
+                String filename = "record" + recordNum + ".txt";
+                System.out.println("filename is: " + filename);
 
-            } catch(IOException e){
-                System.out.println("Error while flushing/closing");
+                File tmp = new File(file, filename);
+                FileWriter recordWriter = new FileWriter(tmp);
+
+                for (Locations location : listOfMoves) {
+                    recordWriter.write(location.getX());
+                    recordWriter.write(location.getY());
+                    recordWriter.write(NEW_LINE_SEPARATOR);
+                }
+                recordNum++;
+                System.out.println("# records is now: " + recordNum);
+                recordWriter.flush();
+                recordWriter.close();
+
+            } catch (Exception e) {
+                System.out.println("Error in creating file");
+                e.printStackTrace();
             }
 
+        }else{
+            System.out.println("Uh-oh. ExternalStorage cannot be written to!");
+            return;
+        }
+    }
 
-        }*/
+
+
+
+    public void gameOver(int winner){
+
+        AlertDialog.Builder gameOverDialog = new AlertDialog.Builder(this);
+        gameOverDialog.setTitle("Game Over!");
+
+        gameOverDialog.setIcon(R.drawable.finishflag);
+
+        if(winner == 0){
+            gameOverDialog.setMessage("White Wins!");
+        }
+
+        if(winner == 1){
+            gameOverDialog.setMessage("Black Wins!");
+        }
+
+        if(winner == -1){       //represents draw
+            gameOverDialog.setMessage("Draw!");
+        }
+
+        gameOverDialog.setPositiveButton("Save Game", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    writeRecordFileOnInternalStorage(GameActivity.this, listOfMoves);
+                    System.out.println("File successfull created!");
+
+
+                    Intent backToMain = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(backToMain);
+
+
+
+                }catch(Exception e){
+                    System.out.println("ERR. Couldn't create file");
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        gameOverDialog.setNegativeButton("Don't Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               System.out.println("Game not Recorded/Saved!");
+
+                //return to main menu
+                Intent backToMain = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(backToMain);
+
+            }
+        });
+
+        AlertDialog alert = gameOverDialog.create();
+        alert.show();
+
+
 
     }
 
