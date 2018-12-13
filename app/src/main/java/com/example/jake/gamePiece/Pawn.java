@@ -9,9 +9,9 @@ public class Pawn extends GamePiece{
 	public Pawn(int wob) {
 		super(wob);
 	}
-	
+
 	public boolean isFirstMove(Locations curr) {
-		
+
 		if((this.getColor() == 1 && curr.getY() == 1) || (this.getColor() == 0 && curr.getY() == 6)){
 			return true;
 		}
@@ -67,6 +67,9 @@ public class Pawn extends GamePiece{
 				return true; } //first move is a capture
 
 			if(((nextRow==currRow-2 || nextRow==currRow-1) && this.getColor() == 0) || ((nextRow==currRow+2 || nextRow==currRow+1) && this.getColor() == 1)) {
+				if(isPromoting(curr,next,board)) {
+					promotionFlag = 1;
+				}
 				return true;
 			}
 
@@ -76,15 +79,22 @@ public class Pawn extends GamePiece{
 		if(val && path && isOneSpace(curr,next,board)) { //now check if going up, or going diagonally to capture
 
 			if(isDiag(curr,next,board) && oppInSpace(curr,next,board)) { //valid capture
+				if(isPromoting(curr,next,board)) {
+					promotionFlag = 1;
+				}
 				return true;
-			}else if((isUp(curr,next,board) && this.getColor() == 0) || (isDown(curr,next,board) && this.getColor() == 1)) {return true;} //moving white up or black down
+			}else if((isUp(curr,next,board) && this.getColor() == 0) || (isDown(curr,next,board) && this.getColor() == 1)) {
+				if(isPromoting(curr,next,board)) {
+					promotionFlag = 1;
+				}
+				return true;} //moving white up or black down
 		}
 		return false;
 	}
 	/*make method for Try to Move to see if its a legal move*/
 	/*This will be the method that error checks for pawn specific moves*/
 	/*Also will be able to indicate if a move will result in a simple change in location or a kill */
-	
-	
+
+
 	/*make method for setting the actual movement if Try to Move is valid*/
 }
