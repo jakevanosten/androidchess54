@@ -25,6 +25,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+//savedGames are saved onto External Storage in the format Record#.txt
+// (# being the static counter for the amount of games are being saved
+
+
 public class RecordsActivity extends AppCompatActivity {
 
     private File root;

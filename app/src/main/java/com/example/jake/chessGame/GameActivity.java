@@ -11,6 +11,7 @@ import android.os.Environment;
 
 
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -589,6 +591,16 @@ public class GameActivity extends AppCompatActivity {
         return possMoves;
     }
 
+    /*
+    public void aiMove(View v){
+
+        Button aiButton = (Button) findViewById(R.id.ai_butt);
+
+        getPossibleMoves()
+
+    }
+    */
+
     public boolean checkForCheck() {
         ArrayList<Locations> pieceMoves = new ArrayList<>();
         for (int j = 0; j < 8; j++) {
@@ -720,13 +732,6 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-    //ASK JAKE WHERE CHECKMATE IS, just needs to call gameOver method to output the screen with results
-
-        //tiff: just testing to see if internal arraylist of moves is working
-        //printListOfMoves(listOfMoves);
-        //think this would be a good spot to call method to write into file; probs will have the same setup in drawGame
-        //writeRecordFileOnInternalStorage(this, listOfMoves);
-        //write the coordinate steps and then deal with freeing the arraylist for this game after recordX.txt is made
 
 
     }
@@ -871,6 +876,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
+                    nameRecord();
                     writeRecordFileInExternalStorage(GameActivity.this, listOfMoves);
                     //writeToFile(listOfMoves, GameActivity.this);
                     System.out.println("File successfull created!");
@@ -904,6 +910,36 @@ public class GameActivity extends AppCompatActivity {
         alert.show();
 
 
+
+    }
+
+    public void nameRecord(){
+        AlertDialog.Builder namingRecordDialog = new AlertDialog.Builder(GameActivity.this);
+
+        namingRecordDialog.setTitle("Game Title");
+        namingRecordDialog.setMessage("Enter Name for Game");
+
+        final EditText input = new EditText(GameActivity.this);
+        LinearLayout.LayoutParams lpd = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lpd);
+
+        namingRecordDialog.setView(input);
+
+        namingRecordDialog.setPositiveButton("Save Game Title", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String gameTitle = input.getText().toString();
+            }
+        });
+
+        namingRecordDialog.setNeutralButton("Set to Default Title", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String gameTitle = "record" + recordNum;
+
+                Toast.makeText(getApplicationContext(), "default title: record" +recordNum, Toast.LENGTH_SHORT).show();
+                }
+        });
 
     }
 
