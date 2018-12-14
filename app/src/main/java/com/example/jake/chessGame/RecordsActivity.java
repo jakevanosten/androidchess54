@@ -44,7 +44,7 @@ public class RecordsActivity extends AppCompatActivity {
 
     //inputstream and bufferreader to load values in text file into string array
     InputStream inputStreamLoader;
-    BufferedReader bufferReaderLoader;
+    BufferedReader bufferedReaderLoader;
 
 
 
@@ -53,7 +53,7 @@ public class RecordsActivity extends AppCompatActivity {
     //From listview example
     private ListView recordListView;
     private ArrayAdapter<String> listAdapter;
-    String ret ="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,41 +63,34 @@ public class RecordsActivity extends AppCompatActivity {
 
         recordListView = (ListView) findViewById(R.id.recordList);
 
-
-        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordnames);
-
-        recordListView.setAdapter(listAdapter);
-
-
         inputStreamCounter = this.getResources().openRawResource(R.raw.recordnames);
         bufferedReaderCounter = new BufferedReader(new InputStreamReader(inputStreamCounter));
 
-        int count = 1;
-
-        //loaders
         inputStreamLoader = this.getResources().openRawResource(R.raw.recordnames);
+        bufferedReaderLoader = new BufferedReader(new InputStreamReader(inputStreamLoader));
 
-        bufferReaderLoader = new BufferedReader(new InputStreamReader(inputStreamLoader));
+        int count = 0;
 
+        //count num lines in file
+        try{
 
-        try {
-            while (bufferedReaderCounter.readLine() != null) {
+            while(bufferedReaderCounter.readLine()!=null){
                 count++;
             }
 
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
 
         recordnames = new String[count];
+        //load rows into string array
+        try{
 
-        try {
-
-            for (int i = 0; i < count; i++) {
-                recordnames[i] = bufferReaderLoader.readLine();
+            for(int i = 0; i < count; i++){
+                recordnames[i] = bufferedReaderLoader.readLine();
             }
 
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
 
@@ -106,12 +99,12 @@ public class RecordsActivity extends AppCompatActivity {
 
         recordListView.setAdapter(listAdapter);
 
-        recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getApplicationContext(), recordnames[position], Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), recordnames[position]+" Date Played: 12/13/2018", Toast.LENGTH_SHORT).show();
 
             }
         });
