@@ -22,6 +22,7 @@ import com.example.jake.gamePiece.*;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
     private static final String NEW_LINE_SEPARATOR = "\n";
 
     //global counter to help name CSV files
-    int recordNum = 0;
+    public static int recordNum = 1;
 
 
     //Declare and initialize knight pieces; going to disregard the string parameter
@@ -213,6 +214,7 @@ public class GameActivity extends AppCompatActivity {
                         lastClick.setX(col);
                         lastClick.setY(row);
                         checkForCheck();
+                        kingIsCaptured();
                         return;
                     }else if(King.castlingFlag == 1){ //do the castle
                         undoFlag = true;
@@ -265,6 +267,7 @@ public class GameActivity extends AppCompatActivity {
                         gameLog.setText("Black: Choose Piece");
                     }
                     checkForCheck();
+                    kingIsCaptured();
                 }else{ //move not valid, do nothing
                     firstClickFlag = true;
                     if(whiteTurn){
@@ -321,6 +324,8 @@ public class GameActivity extends AppCompatActivity {
                             gameLog.setText("Black: Choose Piece");
                         }
                         checkForCheck();
+                        kingIsCaptured();
+
                     }else{ //move not valid
                         firstClickFlag = true;
                         if(whiteTurn){
@@ -337,6 +342,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         checkForCheck();
+        kingIsCaptured();
         lastClick.setX(col);
         lastClick.setY(row);
 
@@ -562,6 +568,7 @@ public class GameActivity extends AppCompatActivity {
         firstClickFlag = true;
         whiteTurn = !(whiteTurn);
         checkForCheck();
+        kingIsCaptured();
     }
     public ArrayList<Locations> getPossibleMoves(Locations from){
         int k =0;
@@ -619,7 +626,81 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
+
+    public boolean kingIsCaptured(){
+        int kingCount = 0;
+        boolean isKingBlack = false;
+        boolean isKingWhite = false;
+
+        for (int j = 0; j < 8; j++){
+            for (int i = 0; i < 8; i++){
+
+                if(internalBoard[i][j].getPiece() instanceof King && internalBoard[i][j].getPiece().getColor() == 1) {
+                    kingCount++;
+                    isKingBlack = true;
+                }
+
+                if(internalBoard[i][j].getPiece() instanceof King && internalBoard[i][j].getPiece().getColor() == 0) {
+                    kingCount++;
+                    isKingWhite = true;
+                }
+
+                else{
+                    continue;
+                }
+            }
+        }
+
+        if(kingCount == 2 && isKingBlack == true && isKingWhite == true){
+            return false;
+        }
+
+        if(kingCount == 1 && isKingBlack == true){
+            gameOver(1);    //TRUE! king IS captured; black wins!
+        }
+
+        if(kingCount == 1 && isKingWhite == true){
+            gameOver(0);    //TRUE! king IS captured; white wins!
+        }
+
+     return false;
+    }
+
+
     public void drawGame(View v){
+
+
+        Button drawButton = (Button) findViewById(R.id.draw);
+
+        AlertDialog.Builder drawDialog = new AlertDialog.Builder(this);
+        drawDialog.setTitle("End Game in Draw?");
+
+        drawDialog.setIcon(R.drawable.finishflag);
+
+
+        drawDialog.setPositiveButton("Yes, Draw Game!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                gameOver(-1);
+
+            }
+        });
+
+        drawDialog.setNeutralButton("No!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+
+            }
+        });
+
+        AlertDialog alert = drawDialog.create();
+        alert.show();
+
+
+
 
     }
 
@@ -627,6 +708,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         Button resignButton = (Button) findViewById(R.id.resign);
+
 
         if(whiteTurn){
             gameLog.setText("Resign: Black wins!");
@@ -679,44 +761,48 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
+    public boolean isExternalStorageAvailable(){
+        String extStorageState = Environment.getExternalStorageState();
+        if(Environment.MEDIA_MOUNTED.equals(extStorageState)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void writeRecordFileInExternalStorage(Context context, ArrayList<Locations> listOfMoves){
 
         boolean isWritable = isExternalStorageWritable();
+        boolean isAvailable = isExternalStorageAvailable();
+        String filename = "record" + recordNum + ".txt";
+        System.out.println("filename is: " + filename);
 
-        if(isWritable == true) {
+        if(isWritable == true && isAvailable == true) {
 
-            File path = context.getExternalFilesDir(null);
-            File file = new File(context.getFilesDir(), "RecordedGames");
+            String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+            System.out.println("Base Directory Path: " + baseDir);
 
-            if (!file.exists()) {
-                file.mkdirs();
-            }
+            File file = new File(baseDir, filename);
 
+            FileWriter writer = null;
             try{
 
-                String filename = "record" + recordNum + ".txt";
-                System.out.println("filename is: " + filename);
+                writer = new FileWriter(file);
 
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
-
-
-                for(Locations location : listOfMoves){
-                    outputStreamWriter.write(location.getX());
-                    outputStreamWriter.write(location.getY());
-                    outputStreamWriter.write(NEW_LINE_SEPARATOR);
+                for(Locations location: listOfMoves){
+                    writer.write(location.getX());
+                    writer.write(location.getY());
+                    writer.write(NEW_LINE_SEPARATOR);
                 }
 
-
-                outputStreamWriter.close();
-                System.out.println("Record File has successfully been created in External Storage!");
-
+                writer.close();
+                System.out.println("Successful! Created file: " + filename);
                 recordNum++;
 
-
-            }catch(IOException e){
-                Log.e("Exception", "file write failed!" + e.toString());
+            }catch(Exception e){
+                e.printStackTrace();
             }
+
 
         }else{
             System.out.println("Uh-oh. ExternalStorage cannot be written to!");

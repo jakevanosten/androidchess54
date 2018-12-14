@@ -6,15 +6,20 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -27,14 +32,142 @@ public class RecordsActivity extends AppCompatActivity {
     private LinearLayout view;
     //private List<String> recordNames;
 
-    public String[] recordNames;
+    //public String[] recordNames;
+
+
+    //DEMO TEST for listView!!!
+    String[] recordnames;
+
+    //inputstream and bufferreader to count length of rows text file
+    InputStream inputStreamCounter;
+    BufferedReader bufferedReaderCounter;
+
+    //inputstream and bufferreader to load values in text file into string array
+    InputStream inputStreamLoader;
+    BufferedReader bufferReaderLoader;
+
+
+
 
 
     //From listview example
     private ListView recordListView;
     private ArrayAdapter<String> listAdapter;
+    String ret ="";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_records);
+
+        recordListView = (ListView) findViewById(R.id.recordList);
 
 
+        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordnames);
+
+        recordListView.setAdapter(listAdapter);
+
+
+        inputStreamCounter = this.getResources().openRawResource(R.raw.recordnames);
+        bufferedReaderCounter = new BufferedReader(new InputStreamReader(inputStreamCounter));
+
+        int count = 1;
+
+        //loaders
+        inputStreamLoader = this.getResources().openRawResource(R.raw.recordnames);
+
+        bufferReaderLoader = new BufferedReader(new InputStreamReader(inputStreamLoader));
+
+
+        try {
+            while (bufferedReaderCounter.readLine() != null) {
+                count++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        recordnames = new String[count];
+
+        try {
+
+            for (int i = 0; i < count; i++) {
+                recordnames[i] = bufferReaderLoader.readLine();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordnames);
+
+        recordListView.setAdapter(listAdapter);
+
+        recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(), recordnames[position], Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+
+    }
+
+        /***************** might use code above *******************/
+
+        /*
+        recordListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });//
+
+
+
+
+    }*/
+
+
+
+ /*
+ private String readFromFile(Context context, String filename){
+        String ret = "";
+        try{
+            InputStream inputStream = context.openFileInput(filename);
+        }
+ }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /********************************************************************************************************/
+    //Will likely un-comment out later on these methods (only methods within stars)
+
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,6 +179,7 @@ public class RecordsActivity extends AppCompatActivity {
 
         root = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
         getRecordFile(root);
+
 
         for(int i = 0; i < recordFileList.size(); i++){
             TextView textView = new TextView(this);
@@ -63,25 +197,25 @@ public class RecordsActivity extends AppCompatActivity {
         //recordListView.setAdapter(listAdapter);
 
 
-        /*
-        recordNames = new ArrayList<String>();
-        String root_sd = Environment.getExternalStorageDirectory().toString();
-        root = new File(root_sd, "/external_sd");
+        /*lines with '///' were previously commented out before test*/
+        ///recordNames = new ArrayList<String>();
+        ///String root_sd = Environment.getExternalStorageDirectory().toString();
+        ///root = new File(root_sd, "/external_sd");
 
-        File list[] = root.listFiles();
+        ///File list[] = root.listFiles();
 
-        for(int i = 0; i < list.length; i++){
+        ///for(int i = 0; i < list.length; i++){
 
-            recordNames.add(list[i].getName());
-        }
+        ///    recordNames.add(list[i].getName());
+        ///}
 
-        ArrayAdapter<String> setListAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordNames);
-        mkdirs
-        */
-
+        ///ArrayAdapter<String> setListAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, recordNames);
+        ///mkdirs
 
 
 
+
+    /*
     }
 
     public ArrayList<File> getRecordFile(File root) {
@@ -123,7 +257,12 @@ public class RecordsActivity extends AppCompatActivity {
 
     }
 
-/*
+    */
+
+    /********************************************************************************************************/
+    /*
+
+
     private String readFromFile(Context context){
         String ret = "";
 
@@ -157,11 +296,11 @@ public class RecordsActivity extends AppCompatActivity {
 
         return ret;
     }
-*/
 
 
 
-     /*
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,5 +348,6 @@ public class RecordsActivity extends AppCompatActivity {
     }
 
     */
+
 }
 
